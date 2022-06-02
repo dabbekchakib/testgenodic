@@ -2,26 +2,26 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Categorie;
+use App\Entity\Media;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
-class CategorieCrudController extends AbstractCrudController
+class MediaCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Categorie::class;
+        return Media::class;
     }
 
- 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('label', "Nom de catégorie"),
-            AssociationField::new("parent","parent"),
-
+            TextField::new('titre'),
+            UrlField::new('videoUrl', 'video Url'),
+            AssociationField::new("categorie")
         ];
     }
-
 }

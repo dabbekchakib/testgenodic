@@ -39,10 +39,20 @@ class Categorie
      */
     private $articles;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Media::class, mappedBy="categorie")
+     */
+    private $media;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->media = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->getLabel();
     }
 
     public function getId(): ?int
@@ -128,6 +138,36 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($article->getCategorie() === $this) {
                 $article->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
+    public function addMedium(Media $medium): self
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media[] = $medium;
+            $medium->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedium(Media $medium): self
+    {
+        if ($this->media->removeElement($medium)) {
+            // set the owning side to null (unless already changed)
+            if ($medium->getCategorie() === $this) {
+                $medium->setCategorie(null);
             }
         }
 

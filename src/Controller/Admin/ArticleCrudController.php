@@ -3,12 +3,18 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AvatarField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
@@ -23,26 +29,31 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            
+
             TextField::new('titre'),
             TextEditorField::new('description'),
             ImageField::new('fichier')
-            ->setBasePath('uploads/articles/')
-            ->setUploadDir('public/uploads/articles/')
-            ->setFormType(FileUploadType::class)
-            ->setUploadedFileNamePattern('[randomhash].[extension]'),
+                ->setBasePath('uploads/articles/')
+                ->setUploadDir('public/uploads/articles/')
+                ->setFormType(FileUploadType::class)
+                ->setFormTypeOptions([
+                    'attr' => [
+                        'accept' => 'application/pdf'
+                    ]
+                ])
+                ->setUploadedFileNamePattern('[randomhash].[extension]'),
             //TextField::new('fichier')->setFormType(FileType::class),
-            DateField::new('createdAt'),
-            TextField::new('auteur')
+            AssociationField::new("categorie"),
+            TextField::new('auteur'),
+            DateField::new('createdAt')
         ];
     }
-  /*   public function configureFilters(Filters $filters): Filters
+
+    /*   public function configureFilters(Filters $filters): Filters
     {
         return $filters
             ->add('titre')
             ->add('auteur')
         ;
     } */
-    
-    
 }

@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -52,9 +53,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commentaires;
 
+
     public function __construct()
     {
+
         $this->commentaires = new ArrayCollection();
+        
+    }
+    public function __toString()
+    {
+        return $this->getPrenom()." ".$this->getNom();
     }
 
     public function getId(): ?int

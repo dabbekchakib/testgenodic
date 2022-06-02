@@ -33,6 +33,16 @@ class Commentaire
      */
     private $contenu;
 
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $publier;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +80,30 @@ class Commentaire
     public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isPublier(): ?bool
+    {
+        return $this->publier;
+    }
+
+    public function setPublier(bool $publier): self
+    {
+        $this->publier = $publier;
 
         return $this;
     }
