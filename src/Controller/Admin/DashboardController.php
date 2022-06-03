@@ -12,8 +12,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -33,11 +35,20 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Articles', 'fa fa-file-text', Article::class);
         yield MenuItem::linkToCrud('Categories', 'fa fa-tags', Categorie::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Commentaire::class);
         yield MenuItem::linkToCrud('Media', 'fas fa-video', Media::class);
+    }
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+      return parent::configureUserMenu($user)
+            ->setAvatarUrl('uploads/users/'.$user->getPhoto())
+            ->displayUserAvatar(true);
+           // ->setGravatarEmail($user->getEmail())
+
     }
 }

@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -30,6 +31,9 @@ class UserCrudController extends AbstractCrudController
     {
         return [
            // IdField::new('id'),
+           ImageField::new('photo')
+                ->setBasePath('uploads/users/')
+                ->setUploadDir('public/uploads/users/'),
             EmailField::new('email'),
             TextField::new('password')->setFormType(PasswordType::class),
             TextField::new('nom'),
@@ -43,7 +47,7 @@ class UserCrudController extends AbstractCrudController
            
         ];
     }
-    /*   public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+     /*  public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if (!$entityInstance instanceof User) return;
         $entityInstance->setPassword($this->passwordHasher->hashPassword($entityInstance, $entityInstance->getPassword()));
