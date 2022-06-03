@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 03 juin 2022 à 18:16
+-- Généré le : ven. 03 juin 2022 à 19:20
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.2.34
 
@@ -58,7 +58,7 @@ INSERT INTO `categorie` (`id`, `parent_id`, `label`) VALUES
 (6, 5, 'Temoignages'),
 (7, 5, 'Reportages'),
 (8, 5, 'Presse'),
-(9, 5, 'Meilleurs');
+(9, 5, 'Web');
 
 -- --------------------------------------------------------
 
@@ -158,6 +158,28 @@ CREATE TABLE `messenger_messages` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `site`
+--
+
+CREATE TABLE `site` (
+  `id` int(11) NOT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `site`
+--
+
+INSERT INTO `site` (`id`, `url`, `titre`, `description`, `image`) VALUES
+(1, 'http://www.bekkoame.ne.jp/~dr.fuk/index.html', 'Protein Music', '<div>Un site en japonais, anglais et français sur les protéodies.&nbsp;</div>', 'Cover1.gif'),
+(2, 'http://www.genodics.com/', 'Genodics.com', '<div>Développement d’applications agro-alimentaires et environnementales des protéodies.&nbsp;</div>', 'genodics.png');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `user`
 --
 
@@ -230,6 +252,12 @@ ALTER TABLE `messenger_messages`
   ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
 
 --
+-- Index pour la table `site`
+--
+ALTER TABLE `site`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -269,6 +297,12 @@ ALTER TABLE `media`
 --
 ALTER TABLE `messenger_messages`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `site`
+--
+ALTER TABLE `site`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `user`
