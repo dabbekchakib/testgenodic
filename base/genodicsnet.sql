@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 03 juin 2022 à 17:29
+-- Généré le : ven. 03 juin 2022 à 18:16
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.2.34
 
@@ -57,7 +57,8 @@ INSERT INTO `categorie` (`id`, `parent_id`, `label`) VALUES
 (5, NULL, 'Media'),
 (6, 5, 'Temoignages'),
 (7, 5, 'Reportages'),
-(8, 5, 'Presse');
+(8, 5, 'Presse'),
+(9, 5, 'Meilleurs');
 
 -- --------------------------------------------------------
 
@@ -113,28 +114,30 @@ CREATE TABLE `media` (
 --
 
 INSERT INTO `media` (`id`, `categorie_id`, `titre`, `video_url`) VALUES
-(3, 5, 'Interview du vigneron Cyril De Benoist du Domaine du Nozay', 'https://youtu.be/LYWENUhY0pw'),
-(4, 5, 'Installation de la P-Box avec Cyril De Benoist vigneron du Domaine du Nozay', 'https://youtu.be/iiJ879gMDls'),
-(5, 5, 'Genodics et la génodique', 'https://youtu.be/_xiawNir6Ok'),
-(6, 5, 'La génodique : quand la musique renforce les plantes', 'https://youtu.be/umNKsCKSq10'),
-(7, 5, '2013, TV Tours – La musique adoucit la vigne chez Alexandre Monmousseau à Vouvray', 'https://youtu.be/jvdHXt5d_HY'),
-(8, 5, '2018, France Info – Réduire les pesticides grâce aux protéodies, Angélique Delahaye', 'https://youtu.be/J4Fh7WHUQ9w'),
-(9, 8, 'Vignes : les bonnes pratiques de Christophe Charrier, viticulteur à Cognac', 'https://youtu.be/NJS3fxgPLYA'),
-(10, 5, 'La génodique : le soin des plantes et des animaux en musique', 'https://youtu.be/TqIT4o-vmNs'),
-(11, 5, 'La musique, un stimulant pour les plantes', 'https://youtu.be/pwvnGITLp2I'),
-(12, 5, '2018, France 3 Gard, JT 19/20 le 24 mai – Esca, mildiou et flavescence dorée au Petit Chaumont', 'https://youtu.be/6N8Tj2GT60A'),
-(13, 5, 'La fête la musique pourrait également s’adresser aux plantes vertes', 'https://youtu.be/-rU2IB0_fVg'),
-(14, 5, '2014, France 3, J.T. 12/13 national le 31 janvier – Stimulation des endives chez Delahaye Maraîcher', 'https://youtu.be/6gaG4t0VZmo'),
-(15, 5, '2018, Michel-Edouard Leclerc – La cave de Buzet pour protéger l’environnement', 'https://youtu.be/0mElV-rDTZg'),
-(16, 5, '2016, Var Matin – Réduction de la mosaîque des courgettes avec des protéodies', 'https://youtu.be/6f3iMcAZhkM'),
-(17, 5, '2016, Télématin – Prévention de la tavelure des pommes avec des protéodies', 'https://youtu.be/Cne2ACbj5wA'),
-(18, 5, '2014, TV Suisse, le 12/03 – Réduction du sclérotinia sur des salades à Pont l’Evêque', 'https://youtu.be/yUwdYjuZZY4'),
-(19, 5, '2011, Fr 3 Basse-Normandie – Réduction du sclérotinia sur des salades d’hiver', 'https://youtu.be/k8zojVI38jQ'),
-(20, 5, '2016, Fr 3 Région Centre – Réduction de l’esca au Domaine Huet à Vouvray', 'https://youtu.be/RTiBMAwv510'),
-(21, 5, 'La fête la musique pourrait également s’adresser aux plantes vertes', 'https://youtu.be/GJrd0KlQ1QU'),
-(22, 5, 'Jouer de la musique à vos plantes pour les faire pousser – 12:45 sur France 3', 'https://youtu.be/_C5G_5NktXs'),
-(23, 5, '2013, M6 le 8 septembre – La musique, médicament pour les vignes, en Champagne', 'https://youtu.be/5oLbiE4BXF0'),
-(24, 5, 'Juin 2018 – Dossier « Musique ça pousse » – 19/20 sur France 3', 'https://youtu.be/ZHJd1a-OCCQ');
+(3, 6, 'Interview du vigneron Cyril De Benoist du Domaine du Nozay', '<iframe width=\"100%\" height=\"200px\" src=\"https://www.youtube.com/embed/LYWENUhY0pw\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(4, 5, 'Installation de la P-Box avec Cyril De Benoist vigneron du Domaine du Nozay', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/iiJ879gMDls\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(5, 5, 'Genodics et la génodique', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/_xiawNir6Ok\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(6, 5, 'La génodique : quand la musique renforce les plantes', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/umNKsCKSq10\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(7, 8, '2013, TV Tours – La musique adoucit la vigne chez Alexandre Monmousseau à Vouvray', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/jvdHXt5d_HY\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(8, 8, '2018, France Info – Réduire les pesticides grâce aux protéodies, Angélique Delahaye', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/J4Fh7WHUQ9w\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(9, 8, 'Vignes : les bonnes pratiques de Christophe Charrier, viticulteur à Cognac', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/NJS3fxgPLYA\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(10, 7, 'La génodique : le soin des plantes et des animaux en musique', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/TqIT4o-vmNs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(11, 7, 'La musique, un stimulant pour les plantes', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/pwvnGITLp2I\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(12, 8, '2018, France 3 Gard, JT 19/20 le 24 mai – Esca, mildiou et flavescence dorée au Petit Chaumont', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/6N8Tj2GT60A\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(13, 8, 'La fête la musique pourrait également s’adresser aux plantes vertes', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/-rU2IB0_fVg\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(14, 6, '2014, France 3, J.T. 12/13 national le 31 janvier – Stimulation des endives chez Delahaye Maraîcher', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/6gaG4t0VZmo\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(15, 6, '2018, Michel-Edouard Leclerc – La cave de Buzet pour protéger l’environnement', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/0mElV-rDTZg\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(16, 7, '2016, Var Matin – Réduction de la mosaîque des courgettes avec des protéodies', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/6f3iMcAZhkM\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(17, 6, '2016, Télématin – Prévention de la tavelure des pommes avec des protéodies', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/Cne2ACbj5wA\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(18, 6, '2014, TV Suisse, le 12/03 – Réduction du sclérotinia sur des salades à Pont l’Evêque', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/yUwdYjuZZY4\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(19, 8, '2011, Fr 3 Basse-Normandie – Réduction du sclérotinia sur des salades d’hiver', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/k8zojVI38jQ\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(20, 8, '2016, Fr 3 Région Centre – Réduction de l’esca au Domaine Huet à Vouvray', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/RTiBMAwv510\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(21, 6, 'La fête la musique pourrait également s’adresser aux plantes vertes', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/GJrd0KlQ1QU\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(22, 8, 'Jouer de la musique à vos plantes pour les faire pousser – 12:45 sur France 3', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/_C5G_5NktXs\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(23, 8, '2013, M6 le 8 septembre – La musique, médicament pour les vignes, en Champagne', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/5oLbiE4BXF0\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(24, 5, 'Juin 2018 – Dossier « Musique ça pousse » – 19/20 sur France 3', '<iframe width=\"100%\" height=\"200\" src=\"https://www.youtube.com/embed/ZHJd1a-OCCQ\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>'),
+(25, 9, 'Portrait radiophonique de Joël Sternheimer et de ses travaux, par Sarah Dirren, dans l\'émission \"Impatience\" de Nancy Ypsilantis diffusée le 25 juin 2012 par la radio 1ère de la Radio-Télévision-Suisse', '<iframe src=\"https://www.rts.ch/play/embed/?urn=urn:rts:audio:4057139\" width=\"100%\" height=\"200\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"fullscreen; geolocation *; autoplay; encrypted-media\" name=\"Joël Sternheimer, musicien des protéines\"></iframe>'),
+(26, 9, 'Balade dans les vignes avec Jean-Marie Pelt Emission \"CO2 mon amour\" sur France-Inter, le 23 février 2013 (de 4\'45\" à 12\'55\") Les données statistiques auxquelles Jean-Marie Pelt se réfère dans cette chronique sur la vigne', '<iframe src=\"https://cdn.radiofrance.fr/s3/cruiser-production/static/inter/sons/2013/02/s08/NET_FI_ef16ef78-7275-4850-91c6-fc208ae85380.mp3\" width=\"100%\" height=\"200\" layout=\"responsive\" frameborder=\"0\" scrolling=\"no\"></iframe>');
 
 -- --------------------------------------------------------
 
@@ -247,7 +250,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `commentaire`
@@ -259,7 +262,7 @@ ALTER TABLE `commentaire`
 -- AUTO_INCREMENT pour la table `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pour la table `messenger_messages`

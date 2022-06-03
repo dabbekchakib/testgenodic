@@ -3,9 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Media;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\TextDirection;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
@@ -20,7 +22,7 @@ class MediaCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            UrlField::new('videoUrl', 'video Url'),
+            TextareaField::new('videoUrl', 'video iFrame'),
             AssociationField::new("categorie")
         ];
     }
