@@ -1,17 +1,9 @@
 {% set route = app.request.attributes.get('_route') %}
 <li class="nav-item dropdown {{route =='index' ? 'active' : ''}}">
-							<a class="nav-link dropdown-toggle" href="./">Accueil</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="index.html">Magazine</a></li>
-								<li><a class="dropdown-item" href="personal.html">Personal</a></li>
-								<li><a class="dropdown-item" href="personal-alt.html">Personal Alt</a></li>
-								<li><a class="dropdown-item" href="minimal.html">Minimal</a></li>
-								<li><a class="dropdown-item" href="classic.html">Classic</a></li>
-							</ul>
+							<a class="nav-link" href="./">Accueil</a>
+							
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="category.html">Lifestyle</a>
-						</li>
+						
 						<li class="nav-item {{route =='app_media' ? 'active' : ''}}">
 							<a class="nav-link dropdown-toggle" href="{{path('app_media')}}">Media</a>
 							<ul class="dropdown-menu">
@@ -21,16 +13,7 @@
 
 							</ul>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#">Pages</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="category.html">Category</a></li>
-								<li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
-								<li><a class="dropdown-item" href="blog-single-alt.html">Blog Single Alt</a></li>
-								<li><a class="dropdown-item" href="about.html">About</a></li>
-								<li><a class="dropdown-item" href="contact.html">Contact</a></li>
-							</ul>
-						</li>
+						
 						<li class="nav-item {{route =='app_contact' ? 'active' : ''}}">
 							<a class="nav-link" href="{{path('app_contact')}}">Contact</a>
 						</li>
