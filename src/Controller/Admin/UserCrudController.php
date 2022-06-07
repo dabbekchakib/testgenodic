@@ -11,6 +11,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
@@ -47,11 +49,17 @@ class UserCrudController extends AbstractCrudController
            
         ];
     }
-     /*  public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if (!$entityInstance instanceof User) return;
-        $entityInstance->setPassword($this->passwordHasher->hashPassword($entityInstance, $entityInstance->getPassword()));
-        //dd($entityInstance);
+        $plainPassword=$entityInstance->getPassword();
+        $factory = new PasswordHasherFactory([
+            'common' => ['algorithm' => 'auto'],
+            'memory-hard' => ['algorithm' => 'auto'],
+        ]);
+        $passwordHasher = $factory->getPasswordHasher('common');
+        $hash = $passwordHasher->hash($plainPassword);
+        $entityInstance->setPassword($hash);
         parent::persistEntity($entityManager, $entityInstance);
        // $entityManager->persist($entityInstance);
        // $entityManager->flush();
@@ -59,11 +67,19 @@ class UserCrudController extends AbstractCrudController
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if (!$entityInstance instanceof User) return;
-        $entityInstance->setPassword($this->passwordHasher->hashPassword($this, $entityInstance->getPassword()));
+        $plainPassword=$entityInstance->getPassword();
+        $tempUser= new User();
+        $factory = new PasswordHasherFactory([
+            'common' => ['algorithm' => 'auto'],
+            'memory-hard' => ['algorithm' => 'auto'],
+        ]);
+        $passwordHasher = $factory->getPasswordHasher('common');
+        $hash = $passwordHasher->hash($plainPassword);
+        $entityInstance->setPassword($hash);
         //dd($entityInstance);
         parent::updateEntity($entityManager, $entityInstance);
        // $entityManager->persist($entityInstance);
        // $entityManager->flush();
-    }  */
+    }  
    
 }

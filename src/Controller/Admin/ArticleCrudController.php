@@ -30,9 +30,15 @@ class ArticleCrudController extends AbstractCrudController
     {
         return [
 
+            
             TextField::new('titre'),
+            ImageField::new('image')
+                ->setBasePath('uploads/articles/images')
+                ->setUploadDir('public/uploads/articles/images/')
+                ->setUploadedFileNamePattern('[randomhash].[extension]'),
             TextEditorField::new('description'),
             ImageField::new('fichier')
+                ->onlyOnForms()
                 ->setBasePath('uploads/articles/')
                 ->setUploadDir('public/uploads/articles/')
                 ->setFormType(FileUploadType::class)
@@ -42,7 +48,9 @@ class ArticleCrudController extends AbstractCrudController
                     ]
                 ])
                 ->setUploadedFileNamePattern('[randomhash].[extension]'),
-            //TextField::new('fichier')->setFormType(FileType::class),
+            UrlField::new('fichier')
+                ->onlyOnIndex(),
+
             AssociationField::new("categorie"),
             TextField::new('auteur'),
             DateField::new('createdAt')
