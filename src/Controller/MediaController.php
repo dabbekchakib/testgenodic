@@ -15,9 +15,11 @@ class MediaController extends AbstractController
      */
     public function index(MediaRepository $mediaRepository): Response
     {
+        $titre="Media";
         $medias=$mediaRepository->findAll();
         return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
+            'titre'=>$titre,
             'medias' => $medias
         ]);
     }
@@ -26,10 +28,12 @@ class MediaController extends AbstractController
      */
     public function presseAction(MediaRepository $mediaRepository, CategorieRepository $categorieRepository): Response
     {
+        $titre="Presse";
         $medias=$categorieRepository->findOneBy(array('label'=>'Presse'))->getMedia();
        
         return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
+            'titre'=>$titre,
             'medias' => $medias
         ]);
     }
@@ -38,10 +42,12 @@ class MediaController extends AbstractController
      */
     public function temoignagesAction(MediaRepository $mediaRepository, CategorieRepository $categorieRepository): Response
     {
+        $titre="Témoignages";
         $medias=$categorieRepository->findOneBy(array('label'=>'Temoignages'))->getMedia();
        
         return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
+            'titre'=>$titre,
             'medias' => $medias
         ]);
     }
@@ -50,10 +56,12 @@ class MediaController extends AbstractController
      */
     public function reportagesAction(MediaRepository $mediaRepository, CategorieRepository $categorieRepository): Response
     {
+        $titre="Reportages";
         $medias=$categorieRepository->findOneBy(array('label'=>'Reportages'))->getMedia();
        
         return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
+            'titre'=>$titre,
             'medias' => $medias
         ]);
     }

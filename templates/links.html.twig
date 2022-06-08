@@ -1,6 +1,6 @@
 {% set route = app.request.attributes.get('_route') %}
 <li class="nav-item dropdown {{route =='index' ? 'active' : ''}}">
-							<a class="nav-link" href="./">Accueil</a>
+							<a class="nav-link" href="{{path('app_home')}}">Accueil</a>
 							
 						</li>
 						
@@ -14,13 +14,20 @@
 							</ul>
 						</li>
 						<li class="nav-item ">
-							<a class="nav-link dropdown-toggle" href="#">Publications</a>
+							<a class="nav-link dropdown-toggle" href="{{path('article_categorie',{'categorie':10})}}">Publications</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">De Joël Sternheimer</a></li>
-								<li><a class="dropdown-item" href="#">Autres</a></li>
-							
-
+								<li><a class="dropdown-item" href="{{path('article_categorie',{'categorie':11})}}">De Joël Sternheimer</a></li>
+								<li><a class="dropdown-item" href="{{path('article_categorie',{'categorie':12})}}">Autres</a></li>
 							</ul>
+						
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link dropdown-toggle" href="{{path('article_categorie',{'categorie':13})}}">Textes d'intérêt</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="{{path('article_categorie',{'categorie':14})}}">De Joël Sternheimer</a></li>
+								<li><a class="dropdown-item" href="{{path('article_categorie',{'categorie':15})}}">Autres</a></li>
+							</ul>
+								
 						</li>
 						
 						<li class="nav-item {{route =='app_contact' ? 'active' : ''}}">

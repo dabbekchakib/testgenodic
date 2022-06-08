@@ -24,19 +24,35 @@ class ContactController extends AbstractController
     /**
      * @Route("/sendmail", name="sendmail", methods={"POST"})
      */
-    public function sendmailAction(Request $request, MailerInterface $mailer): Response
+    public function sendmailAction(Request $request, \Swift_Mailer $mailer): Response
     {
         //dd($request);
-        $email = (new Email())
+        /* $email = (new Email())
             ->from(new Address($request->get('Email'), $request->get('nomPrenom')))
             ->to('contact@genodics.net')
             ->subject($request->get('Subject'))
             ->text($request->get('Message'));
-        $mailer->send($email);
+        $mailer->send($email); */
         //dd($mailer);
+        $name= $request->get('nomPrenom');
+        $message = (new \Swift_Message('Hello Email'))
+        ->setFrom($request->get('Email'))
+        ->setTo('dabbekchakib@gmail.com')
+        ->setBody(
+            $request->get('Message')
+        );
+
+     
+        
+        try {
+            $mailer->send($message);
+            $msg='Email envoyé avec succée';
+        } catch (\Throwable $th) {
+            $msg="Problème d'envoie de votre email";
+        }
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'Contact',
-            'msg' => 'E-mail envoyée avec succées'
+            'msg' => $msg
         ]);
     }
 }
