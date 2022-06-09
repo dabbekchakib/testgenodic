@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -56,7 +57,11 @@ class ArticleCrudController extends AbstractCrudController
             DateField::new('createdAt')
         ];
     }
-
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityPermission('ROLE_ADMIN');
+    }
     /*   public function configureFilters(Filters $filters): Filters
     {
         return $filters
@@ -64,4 +69,5 @@ class ArticleCrudController extends AbstractCrudController
             ->add('auteur')
         ;
     } */
+
 }

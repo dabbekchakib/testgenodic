@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
@@ -21,6 +22,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Factory\PaginatorFactory;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
@@ -40,7 +42,8 @@ class CommentaireCrudController extends AbstractCrudController
             AssociationField::new("utilisateur"),
             AssociationField::new("article"),
             TextEditorField::new('contenu'),
-            BooleanField::new("publier"),
+            BooleanField::new("publier")->onlyOnIndex(),
+            BooleanField::new("publier")->onlyOnForms(),
             DateField::new("createdAt", "Crée le")->hideOnForm(),
         ];
     }
@@ -59,7 +62,12 @@ class CommentaireCrudController extends AbstractCrudController
         $fields = FieldCollection::new($this->configureFields(Crud::PAGE_INDEX));
         $filters = $this->container->get(FilterFactory::class)->create($context->getCrud()->getFiltersConfig(), $fields, $context->getEntity());
         $queryBuilder = $this->createIndexQueryBuilder($context->getSearch(), $context->getEntity(), $fields, $filters);
-        
+        $admin = in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true);
+
+        if (!$admin) {
+            $user = $this->getUser();
+            $queryBuilder->andWhere("entity.utilisateur = :id")->setParameter('id', $user);
+        }
         $paginator = $this->container->get(PaginatorFactory::class)->create($queryBuilder);
 
         // this can happen after deleting some items and trying to return
@@ -69,6 +77,7 @@ class CommentaireCrudController extends AbstractCrudController
                 ->set(EA::PAGE, $paginator->getLastPage())
                 ->generateUrl());
         }
+
         $entities = $this->container->get(EntityFactory::class)->createCollection($context->getEntity(), $paginator->getResults());
         $this->container->get(EntityFactory::class)->processFieldsForAll($entities, $fields);
         $actions = $this->container->get(EntityFactory::class)->processActionsForAll($entities, $context->getCrud()->getActionsConfig());
@@ -94,12 +103,28 @@ class CommentaireCrudController extends AbstractCrudController
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if (!$entityInstance instanceof Commentaire) return;
-        $date= new DateTimeImmutable("now");
+        $date = new DateTimeImmutable("now");
         $entityInstance->setCreatedAt($date);
         //dd($entityInstance);
         parent::persistEntity($entityManager, $entityInstance);
-       // $entityManager->persist($entityInstance);
-       // $entityManager->flush();
+        // $entityManager->persist($entityInstance);
+        // $entityManager->flush();
     }
+    public function configureActions(Actions $actions): Actions
+    {
+        $admin = in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true);
 
+        if ($admin) {
+            parent::configureActions($actions);
+        } else {
+            return $actions
+                ->remove(Crud::PAGE_INDEX, Action::EDIT)
+                ->remove(Crud::PAGE_INDEX, Action::DELETE);
+        }
+    }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityPermission('ROLE_USER');
+    }
 }
