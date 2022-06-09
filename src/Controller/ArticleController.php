@@ -2,12 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Categorie;
+use App\Entity\Commentaire;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleController extends AbstractController
 {
@@ -28,14 +34,17 @@ class ArticleController extends AbstractController
      * @Route("/article/{id}", name="article_single")
      */
     public function articleByIdAction(ArticleRepository $articleRepository, $id): Response
-    {
+    {   
+        // dd($id);
         $article=$articleRepository->find($id);
         $commentaires=$article->getCommentaires();
+        $idArticle = $article->getId();
         return $this->render('article/detail.html.twig', [
             'controller_name' => 'ArticleController',
             'article'=>$article,
-            'commentaires'=>$commentaires
-        ]);
+            'commentaires'=>$commentaires,
+            'idArticle'=> $idArticle    
+           ]);
     }
     /**
      * @Route("/article/categorie/{categorie}", name="article_categorie")
@@ -56,6 +65,35 @@ class ArticleController extends AbstractController
             'controller_name' => 'ArticleController',
             'titre'=>$titre,
             'articles'=>$articles
+        ]);
+    }
+
+     /**
+     * @Route("/article/ajout/comment", name="ajout_comment", methods={"POST"})
+     */
+    public function AjoutComment(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em ): Response
+    {
+        $message = $request->get('Message');
+        $user = $this->getUser();
+        $idArticle = $request->get('idArticle');
+        $article= $articleRepository->find($idArticle);
+        $comment = new Commentaire();
+        $comment->setUtilisateur($user);
+        $comment->setArticle($article);
+        $comment->setContenu($message);
+        $comment->setPublier(false);
+        $comment->setCreatedAt(new DateTimeImmutable('now'));
+
+        $em->persist($comment);
+        $em->flush();
+        $titre= 'article';
+        // return $this->render('article/detail.html.twig', [
+        //     'controller_name' => 'ArticleController',
+        //     'titre'=>$titre,
+        //     'article'=>$article
+        // ]);
+        return $this->redirectToRoute("article_single",[
+            'id'=> $idArticle
         ]);
     }
 }

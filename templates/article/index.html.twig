@@ -50,7 +50,7 @@ endblock%} {% block body %}
                     src="{{ asset('uploads/articles/images/') }}{{
                       article.image
                     }}"
-                    alt="post-title"
+                    alt="post-title"  
                   />
                 </div>
               </a>
@@ -70,7 +70,7 @@ endblock%} {% block body %}
                 </li>
               </ul>
               <h5 class="post-title mb-3 mt-3">
-                <a href="{{path('article_single',{'id':article.id})}}">{{ article.titre }}</a>
+                <a href="{{path('article_single',{'id':article.id})}}" >{{ article.titre }}</a>
               </h5>
               <p class="excerpt mb-0">
                 {{article.description|striptags|slice(0, 200)}}...
