@@ -36,14 +36,19 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Articles', 'fa fa-file-text', Article::class);
-        yield MenuItem::linkToCrud('Categories', 'fa fa-tags', Categorie::class);
-        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Commentaire::class);
+        $admin=in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true);
+        if ($admin) {
+            yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+            yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
+            yield MenuItem::linkToCrud('Articles', 'fa fa-file-text', Article::class);
+            yield MenuItem::linkToCrud('Categories', 'fa fa-tags', Categorie::class);
+            
+        }
+       yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Commentaire::class);
+       if ($admin) {
         yield MenuItem::linkToCrud('Media', 'fas fa-video', Media::class);
         yield MenuItem::linkToCrud('Site', 'fas fa-globe', Site::class);
+    } 
     }
     public function configureUserMenu(UserInterface $user): UserMenu
     {
