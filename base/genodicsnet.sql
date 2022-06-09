@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 08 juin 2022 à 17:08
+-- Généré le : ven. 10 juin 2022 à 00:03
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.2.34
 
@@ -96,7 +96,9 @@ CREATE TABLE `commentaire` (
 
 INSERT INTO `commentaire` (`id`, `utilisateur_id`, `article_id`, `contenu`, `created_at`, `publier`) VALUES
 (3, 4, 5, '<div>test comment</div>', '2022-06-08 15:05:30', 1),
-(4, 1, 5, '<div>dfg fsghfg</div>', '2022-06-08 15:05:43', 1);
+(4, 6, 5, '<div>dfg fsghfg</div>', '2022-06-08 15:05:43', 0),
+(5, 7, 5, 'test22', '2022-06-09 18:25:32', 0),
+(6, 10, 5, 'test123', '2022-06-09 18:29:36', 1);
 
 -- --------------------------------------------------------
 
@@ -250,11 +252,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `photo`) VALUES
-(1, 'dabbekchakib@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$UxwE/xNbxygxZGH6RCymcedPcid.YdcmQQATzE8MWW65x.iM8PapS', 'Dabbek1', 'Chakib1', 'leilani-angel-K84vnnzxmTQ-unsplash.jpg'),
-(3, 'chakibemploi@hotmail.fr', '{\"1\":\"ROLE_USER\"}', '$2y$13$UxwE/xNbxygxZGH6RCymcedPcid.YdcmQQATzE8MWW65x.iM8PapS	', 'Dabbek2', 'Chakib2', NULL),
 (4, 'mhasni.jsk.94j@unnuhol.ga', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$axDDKPUd97Avoe27XW90i.VXj4Z8i/OHH.N1Xo8GELQw/BuFX38dW', 'test411', 'test411', NULL),
 (5, 'contact@kvbvby.de', '[]', '$2y$13$2jC6TKTKbG.JI559Ltf/v.qVlHcSuhaBHIGYU8/OnZ3NJGOAs4NBq', 'test411CC', 'test411CCC', NULL),
-(6, 'admin@gmail.com', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$/1fMoZcmhE6633avWS6J5.xxPdV4MlFlzRn484Qkdbmb2j.SGi1Zm', 'admin', 'prenom', 'harry-cunningham-EPi3TRQc5Z0-unsplash.jpg');
+(6, 'admin@gmail.com', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$p4XgjtXS/7OmbY4QEuPglOHx5/54.spiyOgO1gI0y39colbj5eJum', 'admin', 'prenom', 'harry-cunningham-EPi3TRQc5Z0-unsplash.jpg'),
+(7, 'admin@admin.com', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$p4GtXgOqZ9JCtc57SNwD7udd/h1BwlufexYT1AxSkIw9WPqaYRev.', 'NomAdmin', 'PrenomAdmin', NULL),
+(8, 'fdgdsfhg@fhgs.com', '[]', '$2y$13$1yaJOUgBFR4dNVY72YZAUeuWHGaklJUljnDqDxY6jOGuXJ8UTebp6', '', '', NULL),
+(9, 'mhdh4j@unnuhol.ga', '[\"ROLE_USER\"]', '$2y$13$N9c0A6yRmW/rK0hMGsMoae3z32FBIlpTeXM.SJlvaALFrPUOimjvy', 'dgfdsg', '442', NULL),
+(10, 'user@user.com', '[\"ROLE_USER\"]', '$2y$13$Wlafp1mCIEhVUO1NQu4Awuvk3Uesdy.IGmKfFUuc5/THUR6XzCEg6', 'userNom', 'userPrenom', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -337,7 +341,7 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `media`
@@ -361,7 +365,7 @@ ALTER TABLE `site`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Contraintes pour les tables déchargées
