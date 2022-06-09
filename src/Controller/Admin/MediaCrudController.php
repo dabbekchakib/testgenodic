@@ -39,7 +39,7 @@ class MediaCrudController extends AbstractCrudController
         $admin = in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true);
 
         if ($admin) {
-            parent::configureActions($actions);
+            return parent::configureActions($actions);
         } else {
             return $actions
                 ->remove(Crud::PAGE_INDEX, Action::NEW)
