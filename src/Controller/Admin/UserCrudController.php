@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -86,6 +88,19 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
             ->setEntityPermission('ROLE_ADMIN');
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        $admin = in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true);
+
+        if ($admin) {
+            parent::configureActions($actions);
+        } else {
+            return $actions
+                ->remove(Crud::PAGE_INDEX, Action::NEW)
+                ->remove(Crud::PAGE_INDEX, Action::EDIT)
+                ->remove(Crud::PAGE_INDEX, Action::DELETE);
+        }
     }
    
 }
