@@ -67,3 +67,21 @@
 <li class="nav-item {{ route == 'app_contact' ? 'active' : '' }}">
   <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
 </li>
+{% if not app.user %}
+ 
+  <li class="nav-item ">
+    <a class="nav-link " href="{{ path('app_login') }}">Connexion</a>	
+  </li>
+   <li class="nav-item ">
+    <a class="nav-link " href="{{ path('app_register') }}">Inscription</a>	
+  </li>
+{% else %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+  </li>
+{% if is_granted("ROLE_ADMIN") %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ path('admin') }}">Dashboard</a>
+  </li>
+{% endif %}
+{% endif %}
