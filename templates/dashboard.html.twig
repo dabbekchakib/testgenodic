@@ -9,13 +9,13 @@
 	<div class="container">
 		<div class="row">
 			{% if is_granted("ROLE_ADMIN") %}
-                {% set url = ea_url()
+                {% set utilisateurUrl = ea_url()
                 .setController('App\\Controller\\Admin\\UserCrudController')
                 .setAction('index')
                  %}
 				
                     <div class="col-xl-4 col-md-6 mb-4 mx-auto">
-                        <a href="{{url}}">
+                        <a href="{{utilisateurUrl}}">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -36,7 +36,12 @@
                 
 
 				<div class="col-xl-4 col-md-6 mb-4 mx-auto">
-					<div class="card border-left-warning shadow h-100 py-2">
+					{% set articleUrl = ea_url()
+					.setController('App\\Controller\\Admin\\ArticleCrudController')
+					.setAction('index')
+					%}
+					<a href="{{ articleUrl}}">
+						<div class="card border-left-warning shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -51,10 +56,16 @@
 							</div>
 						</div>
 					</div>
+					</a>
 				</div>
 
 				<div class="col-xl-4 col-md-6 mb-4 mx-auto">
-					<div class="card border-left-warning shadow h-100 py-2">
+					{% set categorieUrl = ea_url()
+					.setController('App\\Controller\\Admin\\CategorieCrudController')
+					.setAction('index')
+					%}
+					<a href="{{ categorieUrl }}">
+						<div class="card border-left-warning shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -69,10 +80,16 @@
 							</div>
 						</div>
 					</div>
+					</a>
 				</div>
 
 				<div class="col-xl-4 col-md-6 mb-4 mx-auto">
-					<div class="card border-left-warning shadow h-100 py-2">
+					{% set commentUrl = ea_url()
+					.setController('App\\Controller\\Admin\\CommentaireCrudController')
+					.setAction('index')
+					%}
+					<a href="{{ commentUrl }}">
+						<div class="card border-left-warning shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -87,10 +104,16 @@
 							</div>
 						</div>
 					</div>
+					</a>
 				</div>
 
 				<div class="col-xl-4 col-md-6 mb-4 mx-auto">
-					<div class="card border-left-warning shadow h-100 py-2">
+					{% set mediaUrl = ea_url()
+					.setController('App\\Controller\\Admin\\MediaCrudController')
+					.setAction('index')
+					%}
+					<a href="{{ mediaUrl }}">
+						<div class="card border-left-warning shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -105,10 +128,16 @@
 							</div>
 						</div>
 					</div>
+					</a>
 				</div>
 
 				<div class="col-xl-4 col-md-6 mb-4 mx-auto">
-					<div class="card border-left-warning shadow h-100 py-2">
+					{% set siteUrl = ea_url()
+					.setController('App\\Controller\\Admin\\SiteCrudController')
+					.setAction('index')
+					%}
+					<a href="{{ siteUrl }}">
+						<div class="card border-left-warning shadow h-100 py-2">
 						<div class="card-body">
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
@@ -123,6 +152,7 @@
 							</div>
 						</div>
 					</div>
+					</a>
 				</div>
 
 				<div class="col-xl-4 col-md-6 mb-4 mx-auto">
