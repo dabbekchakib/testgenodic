@@ -38,6 +38,14 @@ class ArticleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function countItems(): ?int
+       {
+           return $this->createQueryBuilder('a')
+               ->select('COUNT(a.id)')
+               ->getQuery()
+               ->getSingleScalarResult()
+           ;
+       }
 
 //    /**
 //     * @return Article[] Returns an array of Article objects

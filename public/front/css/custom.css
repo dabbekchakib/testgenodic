@@ -7,3 +7,10 @@
     width: 50px;
     height: 50px;
 }
+a.nav-link:hover {
+    color: #FFF;
+    border-radius: 25px;
+    background: #FE4F70;
+    background: -webkit-linear-gradient(left, #FE4F70 0%, #FFA387 100%);
+    background: linear-gradient(to right, #FE4F70 0%, #FFA387 100%);
+  }

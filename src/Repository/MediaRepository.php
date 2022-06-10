@@ -38,6 +38,14 @@ class MediaRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function countItems(): ?int
+       {
+           return $this->createQueryBuilder('a')
+               ->select('COUNT(a.id)')
+               ->getQuery()
+               ->getSingleScalarResult()
+           ;
+       }
 
 //    /**
 //     * @return Media[] Returns an array of Media objects

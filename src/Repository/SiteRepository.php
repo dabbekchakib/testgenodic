@@ -38,6 +38,14 @@ class SiteRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function countItems(): ?int
+       {
+           return $this->createQueryBuilder('a')
+               ->select('COUNT(a.id)')
+               ->getQuery()
+               ->getSingleScalarResult()
+           ;
+       }
 
 //    /**
 //     * @return Site[] Returns an array of Site objects

@@ -698,7 +698,7 @@ body.down .header-default.clone, body.down .header-personal nav.clone, body.down
 
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 80%;
   z-index: 1000;
   display: none;
   min-width: 10rem;
