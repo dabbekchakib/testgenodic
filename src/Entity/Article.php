@@ -59,6 +59,11 @@ class Article
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $motCle;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -182,6 +187,18 @@ class Article
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getMotCle(): ?string
+    {
+        return $this->motCle;
+    }
+
+    public function setMotCle(?string $motCle): self
+    {
+        $this->motCle = $motCle;
 
         return $this;
     }

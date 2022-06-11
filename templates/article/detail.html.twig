@@ -89,7 +89,7 @@ endblock%} {% block body %}
                                         {% endif %}
                                     </div>
                                     <div class="details">
-                                        <h4 class="name"><a href="#">{{comment.utilisateur}}</a></h4>
+                                        <h4 class="name"><a href="#">{{comment.utilisateur.nom}} {{comment.utilisateur.prenom}}</a></h4>
                                         <span class="date">{{comment.createdAt|date("d/m/Y-H:i:s")}}</span>
                                         <p>{{comment.contenu|raw}}</p>
                                         

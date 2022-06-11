@@ -56,7 +56,8 @@ class ArticleCrudController extends AbstractCrudController
 
             AssociationField::new("categorie"),
             TextField::new('auteur'),
-            DateField::new('createdAt')
+            DateField::new('createdAt'),
+            TextField::new('motCle')
         ];
     }
     public function configureCrud(Crud $crud): Crud
