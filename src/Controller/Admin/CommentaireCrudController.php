@@ -23,6 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
@@ -45,6 +46,7 @@ class CommentaireCrudController extends AbstractCrudController
             BooleanField::new("publier")->onlyOnIndex(),
             BooleanField::new("publier")->onlyOnForms(),
             DateField::new("createdAt", "Crée le")->hideOnForm(),
+            AssociationField::new("parent","parent"),
         ];
     }
     public function index(AdminContext $context)

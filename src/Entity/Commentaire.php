@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,21 @@ class Commentaire
      * @ORM\Column(type="boolean")
      */
     private $publier;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Commentaire::class, inversedBy="reponses")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="parent")
+     */
+    private $reponses;
+
+    public function __construct()
+    {
+        $this->reponses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,5 +123,51 @@ class Commentaire
         $this->publier = $publier;
 
         return $this;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getReponses(): Collection
+    {
+        return $this->reponses;
+    }
+
+    public function addReponse(self $reponse): self
+    {
+        if (!$this->reponses->contains($reponse)) {
+            $this->reponses[] = $reponse;
+            $reponse->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(self $reponse): self
+    {
+        if ($this->reponses->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getParent() === $this) {
+                $reponse->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->getId();
     }
 }

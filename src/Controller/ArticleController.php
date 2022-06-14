@@ -84,6 +84,10 @@ class ArticleController extends AbstractController
         $comment->setPublier(false);
         $comment->setCreatedAt(new DateTimeImmutable('now'));
 
+        $parentId = $request->get('Message')->getData();
+        $parent = $em->getRepository(Commentaire::class)->find($parentId);
+        $comment->setParent($parent);
+
         $em->persist($comment);
         $em->flush();
         $titre= 'article';
@@ -96,4 +100,5 @@ class ArticleController extends AbstractController
             'id'=> $idArticle
         ]);
     }
+     
 }

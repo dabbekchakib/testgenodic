@@ -92,7 +92,8 @@ endblock%} {% block body %}
                                         <h4 class="name"><a href="#">{{comment.utilisateur.nom}} {{comment.utilisateur.prenom}}</a></h4>
                                         <span class="date">{{comment.createdAt|date("d/m/Y-H:i:s")}}</span>
                                         <p>{{comment.contenu|raw}}</p>
-                                        
+                                        <p><a href="#comment-form" data-reply data-id="{{comment.id}}"> Répondre </a></p>
+										
                                     </div>
                                 </li>
                                 {% endif %}
@@ -123,7 +124,7 @@ endblock%} {% block body %}
 									<!-- Comment textarea -->
 									<div class="form-group">
 										<input type="text" name="idArticle" hidden value="{{idArticle}}"/>
-										<textarea name="Message" id="InputComment" class="form-control" rows="4" placeholder="Your comment here..." required="required"></textarea>
+										<textarea name="Message" id="InputComment" class="form-control" rows="4" placeholder="Votre commentaire..." required="required"></textarea>
 									</div>
 								</div>
 
@@ -150,7 +151,7 @@ endblock%} {% block body %}
 						
 							</div>
 	
-							<button type="submit" name="submit" id="submit" value="Submit" class="btn btn-default">Submit</button><!-- Submit Button -->
+							<button type="submit" name="submit" id="submit" value="Submit" class="btn btn-default">Envoyer</button><!-- Submit Button -->
 	
 						</form>
 					</div>
@@ -188,3 +189,19 @@ endblock%} {% block body %}
 <!-- end site wrapper -->
 
 {% include "menu.html.twig" %} {% endblock %}
+
+{% block javascripts %}
+	<script>
+		
+			document.querySelectorAll("[data-reply]").forEach(element => {
+				element.addEventListener("click", function(){
+					document.querySelector("#comments_parentId").value = this.dataset.id;
+				});
+			});
+		
+			
+	</script>
+
+
+
+{% endblock %}
