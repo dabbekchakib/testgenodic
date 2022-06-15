@@ -1,5 +1,5 @@
 {% extends 'frontbase.html.twig' %} 
-{% block title %}Genodics-Accueil{% endblock%} 
+{% block title %}Genodicsnet-Accueil{% endblock%} 
 {% block body %}
 
 <!-- site wrapper -->
@@ -22,7 +22,7 @@
         <p class="mt-0 mb-4">Sex: Male</p>
         <p class="mt-0 mb-4">Marital Status: Married, two children</p>
         <p class="mt-0 mb-4">occupation: Independant physicst.</p>
-        <a href="#" class="btn btn-light mt-2">Savoir plus</a>
+        <a href="{{ path('article_categorie', { categorie: 16 }) }}" class="btn btn-light mt-2">Savoir plus</a>
       </div>
     </div>
     <!-- animated mouse wheel -->
