@@ -52,6 +52,7 @@ class RegistrationFormType extends AbstractType
             ->add('photo', FileType::class, [
                 'label' => 'Photo d\'illustration',
                 'data_class' => null,
+                'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Image([
                         'mimeTypes' =>['image/jpeg', 'image/png'],

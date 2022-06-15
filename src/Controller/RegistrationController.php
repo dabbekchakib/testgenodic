@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -35,8 +36,11 @@ class RegistrationController extends AbstractController
         $prenom= $form->get('prenom')->getData();
         $user->setNom((string)$nom);
         $user->setPrenom((string)$prenom);
-            
-        
+         $photo=   $form->get('photo');
+         $newImg= new File($user->getPhoto());
+         $nomImg= md5(uniqid()).'.'.$newImg->guessExtension();
+         $newImg->move("uploads/users/", $nomImg);
+         $user->setPhoto($nomImg);
             $user->setRoles(['ROLE_USER']);
             $user->setPassword(
             $userPasswordHasher->hashPassword(

@@ -51,16 +51,18 @@
               <div class="post post-grid rounded bordered">
                 <div class="thumb top-rounded">
                   <a
-                    href="category.html"
+                    href="{{path('article_categorie',{'categorie':article.categorie.id})}}"
                     class="category-badge position-absolute"
-                    >{{article.categorie}}</a
-                  >
-                  <span class="post-format">
-                    <i class="icon-doc"></i>
-                  </span>
-                  <a href="{{asset('uploads/articles/')}}{{article.fichier}}">
+                    >{{article.categorie}}</a>
+                  
+                  <a href="{{asset('uploads/articles/')}}{{article.fichier}}" target="blank">
+                    <span class="post-format">
+                      <i class="icon-doc"></i>
+                    </span>
+                  </a>
+                  <a href="{{path('article_single',{'id':article.id})}}">
                     <div class="inner">
-                      <img width="100%" height="200" src="{{asset('uploads/articles/images/')}}{{article.image}}" alt="post-title" />
+                      <img class="w-100 image-article" width="100%" height="200" src="{{asset('uploads/articles/images/')}}{{article.image}}" alt="post-title" />
                     </div>
                   </a>
                 </div>
@@ -69,7 +71,7 @@
                     <li class="list-inline-item">
                       <a href="#"
                         ><img
-                          src="images/other/author-sm.png"
+                          src="{{ asset('front/images/other/author-sm.png') }}"
                           class="author"
                           alt="author"
                         />{{article.auteur}}</a
@@ -78,7 +80,7 @@
                     <li class="list-inline-item">{{article.createdAt|date("m/Y")}}</li>
                   </ul>
                   <h5 class="post-title mb-3 mt-3">
-                    <a href="{{asset('uploads/articles/')}}{{article.fichier}}"
+                    <a href="{{path('article_single',{'id':article.id})}}"
                       >{{article.titre}}</a
                     >
                   </h5>
@@ -89,7 +91,7 @@
                 <div class="post-bottom clearfix d-flex align-items-center">
                   
                   <div class="more-button float-end">
-                    <a href="{{asset('uploads/articles/')}}{{article.fichier}}"
+                    <a href="{{path('article_single',{'id':article.id})}}"
                       ><span class="icon-options"></span
                     ></a>
                   </div>

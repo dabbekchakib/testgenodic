@@ -7,6 +7,7 @@ use App\Entity\Categorie;
 use App\Entity\Commentaire;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\CommentaireRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,8 +72,9 @@ class ArticleController extends AbstractController
      /**
      * @Route("/article/ajout/comment", name="ajout_comment", methods={"POST"})
      */
-    public function AjoutComment(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em ): Response
+    public function AjoutComment(Request $request, CommentaireRepository $commentaireRepository ,ArticleRepository $articleRepository, EntityManagerInterface $em ): Response
     {
+        $parent= $commentaireRepository->find($request->get('parent'));
         $message = $request->get('Message');
         $user = $this->getUser();
         $idArticle = $request->get('idArticle');
@@ -82,11 +84,12 @@ class ArticleController extends AbstractController
         $comment->setArticle($article);
         $comment->setContenu($message);
         $comment->setPublier(false);
+        $comment->setParent($parent);
         $comment->setCreatedAt(new DateTimeImmutable('now'));
 
-        $parentId = $request->get('Message')->getData();
-        $parent = $em->getRepository(Commentaire::class)->find($parentId);
-        $comment->setParent($parent);
+        //$parentId = $request->get('Message')->getData();
+        //$parent = $em->getRepository(Commentaire::class)->find($parentId);
+       // $comment->setParent($parent);
 
         $em->persist($comment);
         $em->flush();
