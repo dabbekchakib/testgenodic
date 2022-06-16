@@ -1,6 +1,5 @@
-{% extends 'frontbase.html.twig' %} 
-{% block title %}Genodicsnet-Accueil{% endblock%} 
-{% block body %}
+{% extends 'frontbase.html.twig' %} {% block title %}Genodicsnet-Accueil{%
+endblock%} {% block body %}
 
 <!-- site wrapper -->
 <div class="site-wrapper">
@@ -17,12 +16,16 @@
       <!-- call to action -->
       <div class="cta text-center">
         <h2 class="mt-0 mb-4">Joël Sternheimer</h2>
-        <p class="mt-0 mb-4">Location:  Paris </p>                    
+        <p class="mt-0 mb-4">Location: Paris</p>
         <p class="mt-0 mb-4">Birth Date: Jan. 31, 1943</p>
         <p class="mt-0 mb-4">Sex: Male</p>
         <p class="mt-0 mb-4">Marital Status: Married, two children</p>
         <p class="mt-0 mb-4">occupation: Independant physicst.</p>
-        <a href="{{ path('article_categorie', { categorie: 16 }) }}" class="btn btn-light mt-2">Savoir plus</a>
+        <a
+          href="{{ path('article_categorie', { categorie: 16 }) }}"
+          class="btn btn-light mt-2"
+          >Savoir plus</a
+        >
       </div>
     </div>
     <!-- animated mouse wheel -->
@@ -46,23 +49,39 @@
         <div class="col-lg-8">
           <div class="row gy-4">
             {% for article in publications %}
-              <div class="col-sm-12">
+            <div class="col-sm-12">
               <!-- post -->
               <div class="post post-grid rounded bordered">
                 <div class="thumb top-rounded">
                   <a
-                    href="{{path('article_categorie',{'categorie':article.categorie.id})}}"
+                    href="{{
+                      path('article_categorie', {
+                        categorie: article.categorie.id
+                      })
+                    }}"
                     class="category-badge position-absolute"
-                    >{{article.categorie}}</a>
-                  
-                  <a href="{{asset('uploads/articles/')}}{{article.fichier}}" target="blank">
+                    >{{ article.categorie }}</a
+                  >
+
+                  <a
+                    href="{{ asset('uploads/articles/') }}{{ article.fichier }}"
+                    target="blank"
+                  >
                     <span class="post-format">
                       <i class="icon-doc"></i>
                     </span>
                   </a>
-                  <a href="{{path('article_single',{'id':article.id})}}">
+                  <a href="{{ path('article_single', { id: article.id }) }}">
                     <div class="inner">
-                      <img class="w-100 image-article" width="100%" height="200" src="{{asset('uploads/articles/images/')}}{{article.image}}" alt="post-title" />
+                      <img
+                        class="w-100 image-article"
+                        width="100%"
+                        height="200"
+                        src="{{ asset('uploads/articles/images/') }}{{
+                          article.image
+                        }}"
+                        alt="post-title"
+                      />
                     </div>
                   </a>
                 </div>
@@ -74,24 +93,26 @@
                           src="{{ asset('front/images/other/author-sm.png') }}"
                           class="author"
                           alt="author"
-                        />{{article.auteur}}</a
+                        />{{ article.auteur }}</a
                       >
                     </li>
-                    <li class="list-inline-item">{{article.createdAt|date("m/Y")}}</li>
+                    <li class="list-inline-item">
+                      {{article.createdAt|date("m/Y")}}
+                    </li>
                   </ul>
                   <h5 class="post-title mb-3 mt-3">
-                    <a href="{{path('article_single',{'id':article.id})}}"
-                      >{{article.titre}}</a
+                    <a
+                      href="{{ path('article_single', { id: article.id }) }}"
+                      >{{ article.titre }}</a
                     >
                   </h5>
                   <p class="excerpt mb-0">
-                    {{article.description|raw}}
+                    {{ article.description | raw }}
                   </p>
                 </div>
                 <div class="post-bottom clearfix d-flex align-items-center">
-                  
                   <div class="more-button float-end">
-                    <a href="{{path('article_single',{'id':article.id})}}"
+                    <a href="{{ path('article_single', { id: article.id }) }}"
                       ><span class="icon-options"></span
                     ></a>
                   </div>
@@ -99,9 +120,6 @@
               </div>
             </div>
             {% endfor %}
-            
-
-
           </div>
 
           <nav>
@@ -129,118 +147,29 @@
                   class="mb-4"
                 />
                 <p class="mb-4">
-                  La génodique est une technologie innovante permettant aux cultures de résister aux maladies et mieux grandir.
-Des mélodies appelées protéodies pour renforcer les cultures, prévenir et combattre les maladies.
+                  La génodique est une technologie innovante permettant aux
+                  cultures de résister aux maladies et mieux grandir. Des
+                  mélodies appelées protéodies pour renforcer les cultures,
+                  prévenir et combattre les maladies.
                 </p>
                 {% include "socialMedia.html.twig" %}
               </div>
             </div>
 
-            <!-- widget popular posts -->
-            <div class="widget rounded">
-              <div class="widget-header text-center">
-                <h3 class="widget-title">Popular Posts</h3>
-                <img src="images/wave.svg" class="wave" alt="wave" />
-              </div>
-              <div class="widget-content">
-                <!-- post -->
-                <div class="post post-list-sm circle">
-                  <div class="thumb circle">
-                    <span class="number">1</span>
-                    <a href="blog-single.html">
-                      <div class="inner">
-                        <img src="images/posts/tabs-1.jpg" alt="post-title" />
-                      </div>
-                    </a>
-                  </div>
-                  <div class="details clearfix">
-                    <h6 class="post-title my-0">
-                      <a href="blog-single.html"
-                        >3 Easy Ways To Make Your iPhone Faster</a
-                      >
-                    </h6>
-                    <ul class="meta list-inline mt-1 mb-0">
-                      <li class="list-inline-item">29 March 2021</li>
-                    </ul>
-                  </div>
-                </div>
-                <!-- post -->
-                <div class="post post-list-sm circle">
-                  <div class="thumb circle">
-                    <span class="number">2</span>
-                    <a href="blog-single.html">
-                      <div class="inner">
-                        <img src="images/posts/tabs-2.jpg" alt="post-title" />
-                      </div>
-                    </a>
-                  </div>
-                  <div class="details clearfix">
-                    <h6 class="post-title my-0">
-                      <a href="blog-single.html"
-                        >An Incredibly Easy Method That Works For All</a
-                      >
-                    </h6>
-                    <ul class="meta list-inline mt-1 mb-0">
-                      <li class="list-inline-item">29 March 2021</li>
-                    </ul>
-                  </div>
-                </div>
-                <!-- post -->
-                <div class="post post-list-sm circle">
-                  <div class="thumb circle">
-                    <span class="number">3</span>
-                    <a href="blog-single.html">
-                      <div class="inner">
-                        <img src="images/posts/tabs-3.jpg" alt="post-title" />
-                      </div>
-                    </a>
-                  </div>
-                  <div class="details clearfix">
-                    <h6 class="post-title my-0">
-                      <a href="blog-single.html"
-                        >10 Ways To Immediately Start Selling Furniture</a
-                      >
-                    </h6>
-                    <ul class="meta list-inline mt-1 mb-0">
-                      <li class="list-inline-item">29 March 2021</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <!-- widget hashtags -->
+           {{ include('hashtag/hashtags.html.twig') }}
 
             <!-- widget categories -->
-            <div class="widget rounded">
-              <div class="widget-header text-center">
-                <h3 class="widget-title">Explore Topics</h3>
-                <img src="images/wave.svg" class="wave" alt="wave" />
-              </div>
-              <div class="widget-content">
-                <ul class="list">
-                  <li><a href="#">Lifestyle</a><span>(5)</span></li>
-                  <li><a href="#">Inspiration</a><span>(2)</span></li>
-                  <li><a href="#">Fashion</a><span>(4)</span></li>
-                  <li><a href="#">Politic</a><span>(1)</span></li>
-                  <li><a href="#">Trending</a><span>(7)</span></li>
-                  <li><a href="#">Culture</a><span>(3)</span></li>
-                </ul>
-              </div>
-            </div>
-
-            
+           {{ include('categorie/widget.html.twig') }}
 
             <!-- widget post carousel -->
-            
-
-          
           </div>
         </div>
       </div>
     </div>
   </section>
-  </div>
-{% include "sites.html.twig" %}
-  {% include "footer.html.twig" %}
+</div>
+{% include "sites.html.twig" %} {% include "footer.html.twig" %}
 
 <!-- end site wrapper -->
 

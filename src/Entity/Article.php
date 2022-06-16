@@ -30,7 +30,7 @@ class Article
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fichier;
 
@@ -60,13 +60,14 @@ class Article
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity=Hashtag::class, inversedBy="articles")
      */
-    private $motCle;
+    private $hashtags;
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->hashtags = new ArrayCollection();
     }
     public function __toString()
     {
@@ -191,15 +192,28 @@ class Article
         return $this;
     }
 
-    public function getMotCle(): ?string
+    /**
+     * @return Collection<int, Hashtag>
+     */
+    public function getHashtags(): Collection
     {
-        return $this->motCle;
+        return $this->hashtags;
     }
 
-    public function setMotCle(?string $motCle): self
+    public function addHashtag(Hashtag $hashtag): self
     {
-        $this->motCle = $motCle;
+        if (!$this->hashtags->contains($hashtag)) {
+            $this->hashtags[] = $hashtag;
+        }
 
         return $this;
     }
+
+    public function removeHashtag(Hashtag $hashtag): self
+    {
+        $this->hashtags->removeElement($hashtag);
+
+        return $this;
+    }
+
 }

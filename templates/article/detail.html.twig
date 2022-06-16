@@ -77,7 +77,8 @@ endblock%} {% block body %}
 						<img src="{{asset('front/images/wave.svg')}}" class="wave" alt="wave">
 					</div>
 					<!-- post comments -->
-					<div class="comments bordered padding-30 rounded">
+					{% if commentaires|length > 0 %}
+						<div class="comments bordered padding-30 rounded">
 
 						<ul class="comments">
 							{% for comment in commentaires %}
@@ -177,6 +178,7 @@ endblock%} {% block body %}
 
 						</ul>
 					</div>
+					{% endif %}
 
 					<div class="spacer" data-height="50" style="height: 50px;"></div>
 
@@ -259,7 +261,9 @@ endblock%} {% block body %}
 
 								</div>
 							</div>
-
+							<!-- widget about -->
+							{% set hashtags = article.hashtags %}
+							{% include "hashtag/hashtags.html.twig" %}
 						</div>
 
 

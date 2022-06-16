@@ -57,7 +57,7 @@ class ArticleCrudController extends AbstractCrudController
             AssociationField::new("categorie"),
             TextField::new('auteur'),
             DateField::new('createdAt'),
-            TextField::new('motCle')
+            AssociationField::new('hashtags')
         ];
     }
     public function configureCrud(Crud $crud): Crud
@@ -70,7 +70,8 @@ class ArticleCrudController extends AbstractCrudController
         $admin = in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true);
 
         if ($admin) {
-            return parent::configureActions($actions);
+            return parent::configureActions($actions)
+            ->add(Crud::PAGE_INDEX, Action::DETAIL);
         } else {
             return $actions
                 ->remove(Crud::PAGE_INDEX, Action::NEW)

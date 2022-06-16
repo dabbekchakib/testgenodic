@@ -8,6 +8,7 @@ use App\Entity\Commentaire;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\CommentaireRepository;
+use App\Repository\HashtagRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -101,6 +102,20 @@ class ArticleController extends AbstractController
         // ]);
         return $this->redirectToRoute("article_single",[
             'id'=> $idArticle
+        ]);
+    }
+        /**
+     * @Route("/article/hashtag/{label}", name="article_hashtag")
+     */
+    public function articleByHashtagAction(HashtagRepository $hashtagRepository, $label): Response
+    {
+        
+        $articles=$hashtagRepository->findOneBy(['label'=>$label])->getArticles();
+       $titre=$label;
+        return $this->render('article/index.html.twig', [
+            'controller_name' => 'ArticleController',
+            'titre'=>$titre,
+            'articles'=>$articles
         ]);
     }
      

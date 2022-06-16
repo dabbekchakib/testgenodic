@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\HashtagRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ArticleRepository $articleRepository,SiteRepository $siteRepository, CategorieRepository $categorieRepository): Response
+    public function index(HashtagRepository $hashtagRepository,ArticleRepository $articleRepository,SiteRepository $siteRepository, CategorieRepository $categorieRepository): Response
     {
         $listeCategories=$categorieRepository->findOneBy(['label'=>'Publications'])->getCategories();
         //$listeCategories=$listeCategories->getCategories();
@@ -33,10 +34,14 @@ class HomeController extends AbstractController
             
         }
         //dd($publications);
+        $hashtags=$hashtagRepository->findAll();
         $sites=$siteRepository->findAll();
+        $categories=$categorieRepository->findBy(['parent'=>null]);
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'sites'=> $sites,
+            'hashtags'=> $hashtags,
+            'categories'=> $categories,
             'publications'=> $publications
         ]);
     }

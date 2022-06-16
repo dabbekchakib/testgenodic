@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\Commentaire;
+use App\Entity\Hashtag;
 use App\Entity\Media;
 use App\Entity\Site;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -63,11 +64,13 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Articles', 'fa fa-file-text', Article::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Categories', 'fa fa-tags', Categorie::class)->setPermission('ROLE_ADMIN');
-            
+        yield MenuItem::linkToCrud('Hashtag', 'fa fa-hashtag', Hashtag::class)->setPermission('ROLE_ADMIN');
+
        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Commentaire::class)->setPermission('ROLE_USER');
        
         yield MenuItem::linkToCrud('Media', 'fas fa-video', Media::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Site', 'fas fa-globe', Site::class)->setPermission('ROLE_ADMIN');
+
         yield MenuItem::linkToLogout('Déconnecter', 'fa fa-sign-out')->setPermission('ROLE_USER');
     
     }
