@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : mer. 15 juin 2022 à 14:47
--- Version du serveur : 5.7.36
--- Version de PHP : 7.4.26
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 16 juin 2022 à 18:59
+-- Version du serveur :  10.4.14-MariaDB
+-- Version de PHP : 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,36 +27,55 @@ SET time_zone = "+00:00";
 -- Structure de la table `article`
 --
 
-DROP TABLE IF EXISTS `article`;
-CREATE TABLE IF NOT EXISTS `article` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL,
   `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `fichier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `auteur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `categorie_id` int(11) DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mot_cle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_23A0E66BCF5E72D` (`categorie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `article`
 --
 
-INSERT INTO `article` (`id`, `titre`, `description`, `fichier`, `created_at`, `auteur`, `categorie_id`, `image`, `mot_cle`) VALUES
-(5, 'Dialoguer avec le vivant', '<div>La physique moderne a été bouleversée par la théorie des quanta qui nous a fait passer d\'un monde en apparence bien net dans lequel les objets sont ce qu\'ils sont de façon indépendante, à un monde d\'apparence plus floue ou un objet....</div>', '12924a8a6ca4879e30b7274e97ec5eb78c3a4803.pdf', '2005-03-30 00:00:00', 'Joël Sternheimer', 11, '73b29380c55c9158ee4af7a2c96f196a1378c038.png', NULL),
-(6, 'Génodique appliquée à la guérison des écosystèmes', '<div>Les protéodies sont un nouvel outil capable de réguler la biosynthèse de protéines spécifiques in situ, à partir de leurs données de séquence d\'acides aminés. Contrairement aux actions localisées qui n\'intègrent pas globalement les conséquences environnementales, l\'utilisation des protéodies nécessite un accord à d\'autres échelles, du fait des ondes spécifiques qui médiatisent leur action. Ils offrent ainsi un outil de choix pour rétablir l\'équilibre environnemental.</div>', 'f59d0c7905bc312ebdb4ed7c1e18d650058ddb13.pdf', '2006-10-01 00:00:00', 'Joël Sternheimer', 11, '6b6900b00e5dfc01a4f66058493015f89f3873d5.png', NULL),
-(10, 'La stimulation de la résistance au stress hydrique de graines de petits pois (pisum sativum)', '<div>Parmi les réponses des plantes au stress induit par l\'environnement, l\'expression des protéines modulatrices semble être une étape clé de la signalisation inductible. Notre étude s\'est concentrée sur une stratégie innovante pour stimuler la résistance des plantes au stress, à savoir l\'utilisation de séquences ciblées de fréquences sonores spécifiques.</div><div>L\'influence de la stimulation acoustique sur la synthèse des protéines végétales a été étudiée. Dans notre étude, des pois verts, <em>Pisum sativum</em> , ont été cultivés dans des conditions de stress hydrique avec une stimulation acoustique ciblée. Des séquences acoustiques ciblant les déshydrines (DHN) qui s\'accumulent dans les plantes en réponse à la déshydratation ont été étudiées. Nous avons expérimenté sur l\'ensemencement de pois avec deux séquences de sons différentes : la première correspondait à la protéine apparentée DHN et la seconde visait la séquence consensus DHN. L\'élongation des pousses après la germination des graines de pois a été estimée par le gain de poids frais étudié en présence de diverses conditions d\'exposition aux deux séquences de sons. L\'expression de DHN dans les pois a été quantifiée via des tests ELISA et Western-blot en utilisant des anticorps spécifiques.</div><div>Une augmentation significative du poids frais des pois cultivés sous exposition à la séquence sonore apparentée DHN a été observée, alors que la séquence sonore consensus n\'a eu aucun effet sur la croissance. De plus, la quantité de DHN de 37 kDa a été augmentée chez les pois traités avec la séquence acoustique consensus. Ces résultats suggèrent que l\'expression de DHN pourrait être spécifiquement modulée par un stimulus acoustique conçu.</div>', '4b669611dfc89cb3098396fed6df258979c75b2c.pdf', '2020-11-09 00:00:00', 'Prévost, Victor, et al. “Diffusions of Sound Frequencies Designed to Target Dehydrins Induce Hydric Stress Tolerance in Pisum Sativum Seedings.” Heliyon, vol. 6, no. 9, 2020', 12, 'ece0f6128a954f1443b08a145c597e351d0106e6.png', NULL),
-(11, 'La réduction de la production de protéines par des cultures de cellules', '<div><br>Résumé<br><br></div><div>Objectif : L\'utilisation de fréquences spécifiques pour des acides aminés individuels spécifiques peut augmenter l\'énergie potentielle des molécules de protéines dans le milieu [1]. La résonance augmenterait également le mouvement des particules dans le cytosol, augmentant les collisions nécessaires à la conduction de l\'expression des protéines.<br><br>Méthodes : Le choc de deux ondes qui partagent des fréquences présentera une augmentation de l\'énergie par une augmentation de l\'amplitude [2]. L\'augmentation de l\'énergie augmenterait à son tour le nombre de collisions formant l\'acide aminé-ARNt, augmentant l\'acquisition d\'acides aminés pour les ribosomes afin d\'améliorer l\'efficacité intracellulaire de l\'expression génique. Pour tester l\'hypothèse, la protéine fluorescente rouge (RFP) dans les souches BL-21 transformées d\'E. coli et la protéine p53 de MCF-7 ont été examinées après exposition à des sons de fréquences spécifiques.<br><br>Résultats : Grâce à l\'exposition des systèmes expérimentaux à une séquence de sons correspondant aux fréquences d\'acides aminés spécifiques, les niveaux d\'exposition RFP respectifs des groupes témoins dans le milieu bactérien ont doublé en termes de RFU. Les expériences ciblant la protéine p53 avec la « musique » ont montré une diminution de 28 % de la prévalence cellulaire dans les cellules cancéreuses du sein de type MCF-7, en diminuant la vitesse de formation de la tumeur.<br><br>Conclusion : L\'exposition à la « musique » qui a été conçue en attribuant une note de musique à chacun des vingt acides aminés uniques, a produit à la fois un changement analytique et visible dans la synthèse des protéines, ce qui en fait un outil potentiel pour réduire la durée de la procédure.</div>', '626fbd67cc8e31d7ec2f6b5e1832a89740cecbc0.pdf', '2016-11-06 00:00:00', 'Orhan, Ibrahim Y, and Burak A Gulbahar. “Stimulation of Protein Expression through the Harmonic Resonance of Frequency-Specific Music.” Clinical Investigative Medicine, vol. 39, no. 6, 2016, p. 34', 12, '52cb298343d1488f7545683cc5b40c14903a2036.png', NULL),
-(12, 'Tests de résistance de naissains d’huîtres contaminés par le virus OsHV1', '<div>Test de résistance de naissains d\'huîtres contaminés par le virus OsHV1, avril 2012 &nbsp;</div><div>&nbsp;</div><div>Essai réalisé par Maryline Houssin et son équipe, avec des séquences de « protéodies » d\'environ</div><div>30 mn préparés par Genodics et diffusés deux fois par jour par des haut-parleurs de contact,</div><div>dans des aquariums contenant chacun un échantillon de 100 naissains réputés sains et répartis</div><div>dans 3 salles différentes (pour éviter la transmission des sons entre les aquariums).</div>', '0eff3b7de97b38d35ef121d1855106d089451490.pdf', '2012-01-01 00:00:00', 'Houssin, Maryline & Ferrandiz, Pedro.', 15, '8724d66c7d8caf870a904a591720aae032a2e9c4.png', NULL),
-(13, 'Tests de résistance de naissains d’huîtres contaminés par le virus OsHV1', '<div>Laboratoire départemental Frank Duncombe du Calvados</div><div>&nbsp;– 26 avril 2013&nbsp;</div><div>&nbsp;</div><div>Test de résistance de naissains d’huîtres contaminés par le virus OsHV-1 microvar, &nbsp;</div><div>par application de la séquence de protéodies n° 7 sur 2 échantillons et à deux reprises&nbsp;</div><div>&nbsp;</div><div>Essais réalisé par l’équipe de Maryline Houssin, avec la séquence de « protéodies » n° 7 préparée&nbsp;</div><div>par Genodics (répétée plusieurs fois, avec un total d’environ 30 mn espacées sur 55 minutes).&nbsp;</div><div>Cette séquence est diffusée chaque jour vers 16h30 par des haut-parleurs de contact. &nbsp;</div><div>L’expérimentation a été réalisée sur du naissain d’écloserie de taille T6 et dans trois pièces&nbsp;</div><div>distinctes. Deux salles subissent les protéodies, la troisième est sans diffusion de protéodies&nbsp;</div><div>(témoin manipulation</div>', '599cb0283a17d00e7c54a1480b127c8e71b25308.pdf', '0000-12-30 00:00:00', 'Houssin, Maryline & Ferrandiz, Pedro', 15, '49ad70abdfa68290ed62f0fa9a16a11a3f4f1940.png', NULL),
-(14, 'Proteodies in the hospital: a pilot study', '<div>Une étude pilote concernant l\'utilisation des protéodies dans les soins de santé a été menée à l\'Institut des sciences médicales de l\'hôpital universitaire St. Marianna au cours de l\'année 2001. Aucun effet toxique ou indésirable n\'a été observé parmi les 18 volontaires, qui étaient tous membres du Personnel hospitalier. Plusieurs améliorations notables et quelques rémissions complètes de leurs symptômes et problèmes de santé chroniques se sont produites. Ces résultats, qui vont au-delà des attentes d\'une étude de non-toxicité, appellent un suivi.</div>', 'd52caaf5c992b502c34ef58fd3859ba3bae34a3c.pdf', '2004-01-01 00:00:00', 'J.Sternheimer,  K.Hosh, Y. Fukagawa, B. Marichal', 14, 'a99195d901bd35acff8849d21817e0eb44dea0db.png', NULL),
-(15, 'Homologies musicales de la troponine C, et autres fragments génodiques (1995-1999)', '<div>&nbsp;Cette recherche nous fournit&nbsp; donc&nbsp; quatre&nbsp; protéines&nbsp; où&nbsp; le &nbsp;</div><div>thème musical de la troponine C (et&nbsp; non&nbsp; nécessairement&nbsp; la&nbsp; même &nbsp;</div><div>séquence&nbsp; d’acides&nbsp; aminés&nbsp; correspondants)&nbsp; apparaît.&nbsp; Les &nbsp; deux &nbsp;</div><div>premières&nbsp; sont&nbsp; des&nbsp; protéines&nbsp; du&nbsp; métabolisme&nbsp; du&nbsp; calcium,&nbsp; la &nbsp;</div><div>troisième une protéine musculaire (qui \"chapeaute\"&nbsp; les&nbsp; filaments &nbsp;</div><div>d’actine&nbsp; qui&nbsp; reçoivent&nbsp; la&nbsp; troponine),&nbsp; ce&nbsp; qui &nbsp; permet &nbsp; déjà &nbsp;</div><div>d’inférer, si on l’avait ignoré, le rôle de la troponine&nbsp; dans&nbsp; la &nbsp;</div><div>calcémie et dans la décontraction musculaire. La quatrième est une &nbsp;</div><div>enzyme médiateur d’inflammation qui apparaît&nbsp; notamment&nbsp; dans&nbsp; des &nbsp;</div><div>piqûres et boursouflures&nbsp; entraînant&nbsp; une&nbsp; dilatation&nbsp; locale&nbsp; des &nbsp;</div><div>tissus; &nbsp; nous &nbsp; verrons &nbsp; ci-dessous &nbsp; que&nbsp; &nbsp; d’autres&nbsp; &nbsp; enzymes &nbsp;</div><div>d’inflammation, apparaissant dans les&nbsp; douleurs&nbsp; articulaires&nbsp; par &nbsp;</div><div>exemple, sont au contraire inhibées par la troponine&nbsp; C,&nbsp; dont&nbsp; la &nbsp;</div><div>stimulation apparaît ainsi plus indiquée pour&nbsp; un&nbsp; rhumatisme&nbsp; que &nbsp;</div><div>pour une cause plus externe telle&nbsp; une&nbsp; piqûre,&nbsp; un&nbsp; choc&nbsp; ou&nbsp; une &nbsp;</div><div>foulure (qui ne font pas intervenir le même type d’inflammation).</div>', 'eabf7c8fc48590df564aa6741a5eda85c4047590.pdf', '1999-10-01 00:00:00', 'Joël Sternheimer', 14, 'cf41310be0c0883d25d71fd441432b814d74c31e.png', NULL),
-(16, 'Quelques éléments biographiques', '<pre> Le physicien Joël Sternheimer estime que la science moderne violente la nature quand,\r\n pour tenter de la comprendre, elle la casse en morceaux. Abordant le monde d\'une façon à la fois plus synthétique et plus esthétique\r\n, le savant, qui est aussi un artiste, a découvert des lois révolutionnaires au cæur de la matière et de la vie. Des lois de résonnance\r\n harmonique, qui prouvent - scientifiquement - que la musique peut influencer l\'épanouissement des êtres vivants. Jean-Marie Pelt,\r\nqui le connaît bien, témoigne en sa faveur: enfin une explication satisfaisante de la relation entre la musique et les plantes. </pre><div><br></div>', 'a4a606a95b7323f9d02be9fe0d68277b5419f382.pdf', '1997-01-01 00:00:00', 'Joël Sternheimer', 16, '03a2782b9959de377ef59d2608a0aa4875b7cdb3.png', NULL),
-(17, 'CURRICULUM VITAE de Joël Sternheimer', '<pre>Spécialiste de physique quantique et artiste musicien, Joël Sternheimer est à l’origine d’une nouvelle science qu’il a nommé la génodique. \r\nElle étudie les aspects harmoniques des organismes vivants, et leurs applications pratiques. Ses premières études en physique remontent à la fin des années 60.\r\nSes travaux montrent qu’il est possible de soigner et de renforcer les plantes ainsi que les animaux d’élevage en leur faisant écouter certaines mélodies.</pre><div><br></div>', '04aa434a3ac42ee76b4445fd60cd06f4c858a5c6.pdf', '1943-01-31 00:00:00', 'Joël Sternheimer', 16, '222c277f84ede71030d0fdb76d291b6552b24b37.jpg', NULL);
+INSERT INTO `article` (`id`, `titre`, `description`, `fichier`, `created_at`, `auteur`, `categorie_id`, `image`) VALUES
+(5, 'Dialoguer avec le vivant', '<div>La physique moderne a été bouleversée par la théorie des quanta qui nous a fait passer d\'un monde en apparence bien net dans lequel les objets sont ce qu\'ils sont de façon indépendante, à un monde d\'apparence plus floue ou un objet....</div>', '12924a8a6ca4879e30b7274e97ec5eb78c3a4803.pdf', '2005-03-30 00:00:00', 'Joël Sternheimer', 11, '73b29380c55c9158ee4af7a2c96f196a1378c038.png'),
+(6, 'Génodique appliquée à la guérison des écosystèmes', '<div>Les protéodies sont un nouvel outil capable de réguler la biosynthèse de protéines spécifiques in situ, à partir de leurs données de séquence d\'acides aminés. Contrairement aux actions localisées qui n\'intègrent pas globalement les conséquences environnementales, l\'utilisation des protéodies nécessite un accord à d\'autres échelles, du fait des ondes spécifiques qui médiatisent leur action. Ils offrent ainsi un outil de choix pour rétablir l\'équilibre environnemental.</div>', 'f59d0c7905bc312ebdb4ed7c1e18d650058ddb13.pdf', '2006-10-01 00:00:00', 'Joël Sternheimer', 11, '6b6900b00e5dfc01a4f66058493015f89f3873d5.png'),
+(10, 'La stimulation de la résistance au stress hydrique de graines de petits pois (pisum sativum)', '<div>Parmi les réponses des plantes au stress induit par l\'environnement, l\'expression des protéines modulatrices semble être une étape clé de la signalisation inductible. Notre étude s\'est concentrée sur une stratégie innovante pour stimuler la résistance des plantes au stress, à savoir l\'utilisation de séquences ciblées de fréquences sonores spécifiques.</div><div>L\'influence de la stimulation acoustique sur la synthèse des protéines végétales a été étudiée. Dans notre étude, des pois verts, <em>Pisum sativum</em> , ont été cultivés dans des conditions de stress hydrique avec une stimulation acoustique ciblée. Des séquences acoustiques ciblant les déshydrines (DHN) qui s\'accumulent dans les plantes en réponse à la déshydratation ont été étudiées. Nous avons expérimenté sur l\'ensemencement de pois avec deux séquences de sons différentes : la première correspondait à la protéine apparentée DHN et la seconde visait la séquence consensus DHN. L\'élongation des pousses après la germination des graines de pois a été estimée par le gain de poids frais étudié en présence de diverses conditions d\'exposition aux deux séquences de sons. L\'expression de DHN dans les pois a été quantifiée via des tests ELISA et Western-blot en utilisant des anticorps spécifiques.</div><div>Une augmentation significative du poids frais des pois cultivés sous exposition à la séquence sonore apparentée DHN a été observée, alors que la séquence sonore consensus n\'a eu aucun effet sur la croissance. De plus, la quantité de DHN de 37 kDa a été augmentée chez les pois traités avec la séquence acoustique consensus. Ces résultats suggèrent que l\'expression de DHN pourrait être spécifiquement modulée par un stimulus acoustique conçu.</div>', '4b669611dfc89cb3098396fed6df258979c75b2c.pdf', '2020-11-09 00:00:00', 'Prévost, Victor, et al. “Diffusions of Sound Frequencies Designed to Target Dehydrins Induce Hydric Stress Tolerance in Pisum Sativum Seedings.” Heliyon, vol. 6, no. 9, 2020', 12, 'ece0f6128a954f1443b08a145c597e351d0106e6.png'),
+(11, 'La réduction de la production de protéines par des cultures de cellules', '<div><br>Résumé<br><br></div><div>Objectif : L\'utilisation de fréquences spécifiques pour des acides aminés individuels spécifiques peut augmenter l\'énergie potentielle des molécules de protéines dans le milieu [1]. La résonance augmenterait également le mouvement des particules dans le cytosol, augmentant les collisions nécessaires à la conduction de l\'expression des protéines.<br><br>Méthodes : Le choc de deux ondes qui partagent des fréquences présentera une augmentation de l\'énergie par une augmentation de l\'amplitude [2]. L\'augmentation de l\'énergie augmenterait à son tour le nombre de collisions formant l\'acide aminé-ARNt, augmentant l\'acquisition d\'acides aminés pour les ribosomes afin d\'améliorer l\'efficacité intracellulaire de l\'expression génique. Pour tester l\'hypothèse, la protéine fluorescente rouge (RFP) dans les souches BL-21 transformées d\'E. coli et la protéine p53 de MCF-7 ont été examinées après exposition à des sons de fréquences spécifiques.<br><br>Résultats : Grâce à l\'exposition des systèmes expérimentaux à une séquence de sons correspondant aux fréquences d\'acides aminés spécifiques, les niveaux d\'exposition RFP respectifs des groupes témoins dans le milieu bactérien ont doublé en termes de RFU. Les expériences ciblant la protéine p53 avec la « musique » ont montré une diminution de 28 % de la prévalence cellulaire dans les cellules cancéreuses du sein de type MCF-7, en diminuant la vitesse de formation de la tumeur.<br><br>Conclusion : L\'exposition à la « musique » qui a été conçue en attribuant une note de musique à chacun des vingt acides aminés uniques, a produit à la fois un changement analytique et visible dans la synthèse des protéines, ce qui en fait un outil potentiel pour réduire la durée de la procédure.</div>', '626fbd67cc8e31d7ec2f6b5e1832a89740cecbc0.pdf', '2016-11-06 00:00:00', 'Orhan, Ibrahim Y, and Burak A Gulbahar. “Stimulation of Protein Expression through the Harmonic Resonance of Frequency-Specific Music.” Clinical Investigative Medicine, vol. 39, no. 6, 2016, p. 34', 12, '52cb298343d1488f7545683cc5b40c14903a2036.png'),
+(12, 'Tests de résistance de naissains d’huîtres contaminés par le virus OsHV1', '<div>Test de résistance de naissains d\'huîtres contaminés par le virus OsHV1, avril 2012 &nbsp;</div><div>&nbsp;</div><div>Essai réalisé par Maryline Houssin et son équipe, avec des séquences de « protéodies » d\'environ</div><div>30 mn préparés par Genodics et diffusés deux fois par jour par des haut-parleurs de contact,</div><div>dans des aquariums contenant chacun un échantillon de 100 naissains réputés sains et répartis</div><div>dans 3 salles différentes (pour éviter la transmission des sons entre les aquariums).</div>', '0eff3b7de97b38d35ef121d1855106d089451490.pdf', '2012-01-01 00:00:00', 'Houssin, Maryline & Ferrandiz, Pedro.', 15, '8724d66c7d8caf870a904a591720aae032a2e9c4.png'),
+(13, 'Tests de résistance de naissains d’huîtres contaminés par le virus OsHV1', '<div>Laboratoire départemental Frank Duncombe du Calvados</div><div>&nbsp;– 26 avril 2013&nbsp;</div><div>&nbsp;</div><div>Test de résistance de naissains d’huîtres contaminés par le virus OsHV-1 microvar, &nbsp;</div><div>par application de la séquence de protéodies n° 7 sur 2 échantillons et à deux reprises&nbsp;</div><div>&nbsp;</div><div>Essais réalisé par l’équipe de Maryline Houssin, avec la séquence de « protéodies » n° 7 préparée&nbsp;</div><div>par Genodics (répétée plusieurs fois, avec un total d’environ 30 mn espacées sur 55 minutes).&nbsp;</div><div>Cette séquence est diffusée chaque jour vers 16h30 par des haut-parleurs de contact. &nbsp;</div><div>L’expérimentation a été réalisée sur du naissain d’écloserie de taille T6 et dans trois pièces&nbsp;</div><div>distinctes. Deux salles subissent les protéodies, la troisième est sans diffusion de protéodies&nbsp;</div><div>(témoin manipulation</div>', '599cb0283a17d00e7c54a1480b127c8e71b25308.pdf', '0000-12-30 00:00:00', 'Houssin, Maryline & Ferrandiz, Pedro', 15, '49ad70abdfa68290ed62f0fa9a16a11a3f4f1940.png'),
+(14, 'Proteodies in the hospital: a pilot study', '<div>Une étude pilote concernant l\'utilisation des protéodies dans les soins de santé a été menée à l\'Institut des sciences médicales de l\'hôpital universitaire St. Marianna au cours de l\'année 2001. Aucun effet toxique ou indésirable n\'a été observé parmi les 18 volontaires, qui étaient tous membres du Personnel hospitalier. Plusieurs améliorations notables et quelques rémissions complètes de leurs symptômes et problèmes de santé chroniques se sont produites. Ces résultats, qui vont au-delà des attentes d\'une étude de non-toxicité, appellent un suivi.</div>', 'd52caaf5c992b502c34ef58fd3859ba3bae34a3c.pdf', '2004-01-01 00:00:00', 'J.Sternheimer,  K.Hosh, Y. Fukagawa, B. Marichal', 14, 'a99195d901bd35acff8849d21817e0eb44dea0db.png'),
+(15, 'Homologies musicales de la troponine C, et autres fragments génodiques (1995-1999)', '<div>&nbsp;Cette recherche nous fournit&nbsp; donc&nbsp; quatre&nbsp; protéines&nbsp; où&nbsp; le &nbsp;</div><div>thème musical de la troponine C (et&nbsp; non&nbsp; nécessairement&nbsp; la&nbsp; même &nbsp;</div><div>séquence&nbsp; d’acides&nbsp; aminés&nbsp; correspondants)&nbsp; apparaît.&nbsp; Les &nbsp; deux &nbsp;</div><div>premières&nbsp; sont&nbsp; des&nbsp; protéines&nbsp; du&nbsp; métabolisme&nbsp; du&nbsp; calcium,&nbsp; la &nbsp;</div><div>troisième une protéine musculaire (qui \"chapeaute\"&nbsp; les&nbsp; filaments &nbsp;</div><div>d’actine&nbsp; qui&nbsp; reçoivent&nbsp; la&nbsp; troponine),&nbsp; ce&nbsp; qui &nbsp; permet &nbsp; déjà &nbsp;</div><div>d’inférer, si on l’avait ignoré, le rôle de la troponine&nbsp; dans&nbsp; la &nbsp;</div><div>calcémie et dans la décontraction musculaire. La quatrième est une &nbsp;</div><div>enzyme médiateur d’inflammation qui apparaît&nbsp; notamment&nbsp; dans&nbsp; des &nbsp;</div><div>piqûres et boursouflures&nbsp; entraînant&nbsp; une&nbsp; dilatation&nbsp; locale&nbsp; des &nbsp;</div><div>tissus; &nbsp; nous &nbsp; verrons &nbsp; ci-dessous &nbsp; que&nbsp; &nbsp; d’autres&nbsp; &nbsp; enzymes &nbsp;</div><div>d’inflammation, apparaissant dans les&nbsp; douleurs&nbsp; articulaires&nbsp; par &nbsp;</div><div>exemple, sont au contraire inhibées par la troponine&nbsp; C,&nbsp; dont&nbsp; la &nbsp;</div><div>stimulation apparaît ainsi plus indiquée pour&nbsp; un&nbsp; rhumatisme&nbsp; que &nbsp;</div><div>pour une cause plus externe telle&nbsp; une&nbsp; piqûre,&nbsp; un&nbsp; choc&nbsp; ou&nbsp; une &nbsp;</div><div>foulure (qui ne font pas intervenir le même type d’inflammation).</div>', 'eabf7c8fc48590df564aa6741a5eda85c4047590.pdf', '1999-10-01 00:00:00', 'Joël Sternheimer', 14, 'cf41310be0c0883d25d71fd441432b814d74c31e.png'),
+(16, 'Quelques éléments biographiques', '<pre> Le physicien Joël Sternheimer estime que la science moderne violente la nature quand,\r\n pour tenter de la comprendre, elle la casse en morceaux. Abordant le monde d\'une façon à la fois plus synthétique et plus esthétique\r\n, le savant, qui est aussi un artiste, a découvert des lois révolutionnaires au cæur de la matière et de la vie. Des lois de résonnance\r\n harmonique, qui prouvent - scientifiquement - que la musique peut influencer l\'épanouissement des êtres vivants. Jean-Marie Pelt,\r\nqui le connaît bien, témoigne en sa faveur: enfin une explication satisfaisante de la relation entre la musique et les plantes. </pre><div><br></div>', 'a4a606a95b7323f9d02be9fe0d68277b5419f382.pdf', '1997-01-01 00:00:00', 'Joël Sternheimer', 16, '03a2782b9959de377ef59d2608a0aa4875b7cdb3.png'),
+(17, 'CURRICULUM VITAE de Joël Sternheimer', '<pre>Spécialiste de physique quantique et artiste musicien, Joël Sternheimer est à l’origine d’une nouvelle science qu’il a nommé la génodique. \r\nElle étudie les aspects harmoniques des organismes vivants, et leurs applications pratiques. Ses premières études en physique remontent à la fin des années 60.\r\nSes travaux montrent qu’il est possible de soigner et de renforcer les plantes ainsi que les animaux d’élevage en leur faisant écouter certaines mélodies.</pre><div><br></div>', '04aa434a3ac42ee76b4445fd60cd06f4c858a5c6.pdf', '1943-01-31 00:00:00', 'Joël Sternheimer', 16, '222c277f84ede71030d0fdb76d291b6552b24b37.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `article_hashtag`
+--
+
+CREATE TABLE `article_hashtag` (
+  `article_id` int(11) NOT NULL,
+  `hashtag_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `article_hashtag`
+--
+
+INSERT INTO `article_hashtag` (`article_id`, `hashtag_id`) VALUES
+(5, 3),
+(5, 5),
+(5, 6),
+(5, 7),
+(5, 8),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -64,14 +83,11 @@ INSERT INTO `article` (`id`, `titre`, `description`, `fichier`, `created_at`, `a
 -- Structure de la table `categorie`
 --
 
-DROP TABLE IF EXISTS `categorie`;
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorie` (
+  `id` int(11) NOT NULL,
   `parent_id` int(11) DEFAULT NULL,
-  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_497DD634727ACA70` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -97,20 +113,15 @@ INSERT INTO `categorie` (`id`, `parent_id`, `label`) VALUES
 -- Structure de la table `commentaire`
 --
 
-DROP TABLE IF EXISTS `commentaire`;
-CREATE TABLE IF NOT EXISTS `commentaire` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `commentaire` (
+  `id` int(11) NOT NULL,
   `utilisateur_id` int(11) DEFAULT NULL,
   `article_id` int(11) NOT NULL,
   `contenu` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `publier` tinyint(1) NOT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_67F068BCFB88E14F` (`utilisateur_id`),
-  KEY `IDX_67F068BC7294869C` (`article_id`),
-  KEY `IDX_67F068BC727ACA70` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `parent_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `commentaire`
@@ -118,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
 
 INSERT INTO `commentaire` (`id`, `utilisateur_id`, `article_id`, `contenu`, `created_at`, `publier`, `parent_id`) VALUES
 (3, 4, 5, '<div>test comment</div>', '2022-06-08 15:05:30', 1, NULL),
-(4, 6, 5, '<div>dfg fsghfg</div>', '2022-06-08 15:05:43', 0, NULL),
+(4, 6, 5, '<div>dfg fsghfg</div>', '2022-06-08 15:05:43', 1, NULL),
 (5, 7, 5, 'test22', '2022-06-09 18:25:32', 0, NULL),
 (6, 10, 5, 'test123', '2022-06-09 18:29:36', 1, NULL),
 (7, 11, 5, 'test test', '2022-06-11 16:45:43', 1, NULL),
@@ -130,12 +141,10 @@ INSERT INTO `commentaire` (`id`, `utilisateur_id`, `article_id`, `contenu`, `cre
 -- Structure de la table `doctrine_migration_versions`
 --
 
-DROP TABLE IF EXISTS `doctrine_migration_versions`;
-CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
+CREATE TABLE `doctrine_migration_versions` (
   `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
-  `execution_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`version`)
+  `execution_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -150,18 +159,37 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `hashtag`
+--
+
+CREATE TABLE `hashtag` (
+  `id` int(11) NOT NULL,
+  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `hashtag`
+--
+
+INSERT INTO `hashtag` (`id`, `label`) VALUES
+(3, 'joel'),
+(5, 'joel11'),
+(6, 'joel44'),
+(7, 'joel456'),
+(8, 'joel47');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `media`
 --
 
-DROP TABLE IF EXISTS `media`;
-CREATE TABLE IF NOT EXISTS `media` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `media` (
+  `id` int(11) NOT NULL,
   `categorie_id` int(11) NOT NULL,
   `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_6A2CA10CBCF5E72D` (`categorie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `video_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `media`
@@ -199,20 +227,15 @@ INSERT INTO `media` (`id`, `categorie_id`, `titre`, `video_url`) VALUES
 -- Structure de la table `messenger_messages`
 --
 
-DROP TABLE IF EXISTS `messenger_messages`;
-CREATE TABLE IF NOT EXISTS `messenger_messages` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `messenger_messages` (
+  `id` bigint(20) NOT NULL,
   `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
   `available_at` datetime NOT NULL,
-  `delivered_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
-  KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
-  KEY `IDX_75EA56E016BA31DB` (`delivered_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `delivered_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `messenger_messages`
@@ -249,15 +272,13 @@ INSERT INTO `messenger_messages` (`id`, `body`, `headers`, `queue_name`, `create
 -- Structure de la table `site`
 --
 
-DROP TABLE IF EXISTS `site`;
-CREATE TABLE IF NOT EXISTS `site` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `site` (
+  `id` int(11) NOT NULL,
   `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `site`
@@ -273,18 +294,15 @@ INSERT INTO `site` (`id`, `url`, `titre`, `description`, `image`) VALUES
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
   `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
@@ -298,7 +316,137 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `photo`
 (8, 'fdgdsfhg@fhgs.com', '[]', '$2y$13$1yaJOUgBFR4dNVY72YZAUeuWHGaklJUljnDqDxY6jOGuXJ8UTebp6', '', '', NULL),
 (9, 'mhdh4j@unnuhol.ga', '[\"ROLE_USER\"]', '$2y$13$N9c0A6yRmW/rK0hMGsMoae3z32FBIlpTeXM.SJlvaALFrPUOimjvy', 'dgfdsg', '442', NULL),
 (10, 'user@user.com', '[\"ROLE_USER\"]', '$2y$13$Wlafp1mCIEhVUO1NQu4Awuvk3Uesdy.IGmKfFUuc5/THUR6XzCEg6', 'userNom', 'userPrenom', NULL),
-(11, 'user@useruser.com', '[\"ROLE_USER\"]', '$2y$13$m69A6Zl.vil5ZjHeEpczDuhMknLSfvS8f1ZHAZPpAaFS79sqk4yrK', 'Bouguenna', 'Halima', 'C:\\wamp64\\tmp\\php18.tmp');
+(11, 'user@useruser.com', '[\"ROLE_USER\"]', '$2y$13$BRGbgVRhvIGyM3vJCfwBfur/gLCJ4LtV69o4yqYHFum1rzg7Dx8D2', 'Bouguenna', 'Halima', 'anthony-metcalfe-QQsRTGAZp9o-unsplash.jpg'),
+(12, 'manel12@gmail.com', '[\"ROLE_USER\"]', '$2y$13$QVfeESuLRfOVicUISO7bOOztSH7R3xt8YQiVnxB4cDVDpp5LEkZee', 'manel', 'mohamed', '11fe0b3adbab75f9ffbe6460c3e8548b.png');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_23A0E66BCF5E72D` (`categorie_id`);
+
+--
+-- Index pour la table `article_hashtag`
+--
+ALTER TABLE `article_hashtag`
+  ADD PRIMARY KEY (`article_id`,`hashtag_id`),
+  ADD KEY `IDX_B7676ED67294869C` (`article_id`),
+  ADD KEY `IDX_B7676ED6FB34EF56` (`hashtag_id`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_497DD634727ACA70` (`parent_id`);
+
+--
+-- Index pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_67F068BCFB88E14F` (`utilisateur_id`),
+  ADD KEY `IDX_67F068BC7294869C` (`article_id`),
+  ADD KEY `IDX_67F068BC727ACA70` (`parent_id`);
+
+--
+-- Index pour la table `doctrine_migration_versions`
+--
+ALTER TABLE `doctrine_migration_versions`
+  ADD PRIMARY KEY (`version`);
+
+--
+-- Index pour la table `hashtag`
+--
+ALTER TABLE `hashtag`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_5AB52A61EA750E8` (`label`);
+
+--
+-- Index pour la table `media`
+--
+ALTER TABLE `media`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_6A2CA10CBCF5E72D` (`categorie_id`);
+
+--
+-- Index pour la table `messenger_messages`
+--
+ALTER TABLE `messenger_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
+  ADD KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
+  ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
+
+--
+-- Index pour la table `site`
+--
+ALTER TABLE `site`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `article`
+--
+ALTER TABLE `article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `hashtag`
+--
+ALTER TABLE `hashtag`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `media`
+--
+ALTER TABLE `media`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT pour la table `messenger_messages`
+--
+ALTER TABLE `messenger_messages`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT pour la table `site`
+--
+ALTER TABLE `site`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Contraintes pour les tables déchargées
@@ -309,6 +457,13 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `photo`
 --
 ALTER TABLE `article`
   ADD CONSTRAINT `FK_23A0E66BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`);
+
+--
+-- Contraintes pour la table `article_hashtag`
+--
+ALTER TABLE `article_hashtag`
+  ADD CONSTRAINT `FK_B7676ED67294869C` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_B7676ED6FB34EF56` FOREIGN KEY (`hashtag_id`) REFERENCES `hashtag` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `categorie`
@@ -334,4 +489,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
