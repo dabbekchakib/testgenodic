@@ -23,6 +23,34 @@ class MediaController extends AbstractController
             'medias' => $medias
         ]);
     }
+        /**
+     * @Route("/media/detail/{id}", name="media_detail")
+     */
+    public function mediaById(MediaRepository $mediaRepository, $id): Response
+    {
+        $titre="Media";
+        $media=$mediaRepository->find($id);
+        return $this->render('media/detail.html.twig', [
+            'controller_name' => 'MediaController',
+            'titre'=>$titre,
+            'media' => $media
+        ]);
+    }
+    /**
+     * @Route("/media/categorie/{id}", name="media_categorie")
+     */
+    public function categoryMediaAction(MediaRepository $mediaRepository, CategorieRepository $categorieRepository, $id): Response
+    {
+        //dd($categorieRepository->find($id));
+        $titre=$categorieRepository->find($id)->getLabel();
+        $medias=$categorieRepository->findOneBy(array('label'=>$titre))->getMedia();
+       
+        return $this->render('media/index.html.twig', [
+            'controller_name' => 'MediaController',
+            'titre'=>$titre,
+            'medias' => $medias
+        ]);
+    }
     /**
      * @Route("/media/presse", name="presse")
      */
