@@ -40,7 +40,8 @@ class DashboardController extends AbstractDashboardController
         'users'=>$this->EntityCount(User::class),
         'categories'=>$this->EntityCount(Categorie::class),
         'commentaires'=>$this->EntityCount(Commentaire::class),
-        'sites'=>$this->EntityCount(Site::class)
+        'sites'=>$this->EntityCount(Site::class),
+        'hashtags'=>$this->EntityCount(Hashtag::class)
         ];
         //return parent::index();
         return $this->render('dashboard.html.twig', [
