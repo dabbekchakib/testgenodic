@@ -10,9 +10,10 @@ endblock%} {% block body %}
   <!-- section hero -->
   <section
     class="hero data-bg-image d-flex align-items-center"
-    data-bg-image="images/other/hero.jpg"
+    data-bg-image="{{asset('front/images/other/hero.jpg')}}"
   >
     <div class="container-xl">
+      
       <!-- call to action -->
       <div class="cta text-center">
         <h2 class="mt-0 mb-4">Joël Sternheimer</h2>
@@ -47,6 +48,13 @@ endblock%} {% block body %}
     <div class="container-xl">
       <div class="row gy-4">
         <div class="col-lg-8">
+          <div class="row">
+            <div class="col-sm-12">
+              <video width="100%" controls autoplay muted class="rounded mb-3">
+                <source src="{{asset('uploads/videos/definition.mp4')}}" type="video/mp4">
+              </video>
+            </div>
+          </div>
           <div class="row gy-4">
             {% for article in publications %}
             <div class="col-sm-12">
@@ -139,7 +147,7 @@ endblock%} {% block body %}
             <div class="widget rounded">
               <div
                 class="widget-about data-bg-image text-center"
-                data-bg-image="images/map-bg.png"
+                data-bg-image="{{asset('front/images/map-bg.png')}}"
               >
                 <img
                   src="{{ asset('front/images/logoNoir.png') }}"
