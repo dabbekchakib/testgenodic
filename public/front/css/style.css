@@ -1066,9 +1066,9 @@ section {
 .hero .cta {
   margin: auto;
   max-width: 700px;
-  padding-top: 120px;
+  /* padding-top: 120px; */
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .hero .cta h2 {
   color: #FFF;
