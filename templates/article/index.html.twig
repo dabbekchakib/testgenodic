@@ -31,7 +31,7 @@
     <div class="container-xl">
       <div class="row">
         {% for article in articles %}
-        <div class="col-sm-6 d-flex mx-auto">
+        <div class="col-sm-6 d-flex mx-auto my-3">
           <!-- post -->
           <div class="post post-grid rounded bordered">
             <div class="thumb top-rounded">
@@ -76,7 +76,10 @@
                 <a href="{{path('article_single',{'id':article.id})}}" >{{ article.titre }}</a>
               </h5>
               <p class="excerpt mb-0">
-                {{article.description|striptags|slice(0, 200)}}...
+                {{article.description|striptags|slice(0, 200)}}
+                <a href="{{path('article_single',{'id':article.id})}}"
+                  class="button">[...]</a>
+                
               </p>
             </div>
             <div class="post-bottom clearfix d-flex align-items-center float-end">

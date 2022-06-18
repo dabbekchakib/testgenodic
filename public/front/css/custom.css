@@ -21,3 +21,7 @@ a.nav-link:hover {
     border: 2px solid white;
     
  }
+ i.icon-doc {
+    margin-top: 14px !important;
+    display: block;
+}
