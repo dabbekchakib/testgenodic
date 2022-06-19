@@ -38,6 +38,14 @@ class LikeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function countItems(): ?int
+       {
+           return $this->createQueryBuilder('a')
+               ->select('COUNT(a.id)')
+               ->getQuery()
+               ->getSingleScalarResult()
+           ;
+       }
 
 //    /**
 //     * @return Like[] Returns an array of Like objects

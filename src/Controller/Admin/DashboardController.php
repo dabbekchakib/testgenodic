@@ -5,7 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\Commentaire;
+use App\Entity\Dislike;
 use App\Entity\Hashtag;
+use App\Entity\Like;
 use App\Entity\Media;
 use App\Entity\Site;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -42,6 +44,8 @@ class DashboardController extends AbstractDashboardController
         'categories'=>$this->EntityCount(Categorie::class),
         'commentaires'=>$this->EntityCount(Commentaire::class),
         'sites'=>$this->EntityCount(Site::class),
+        'likes'=>$this->EntityCount(Like::class),
+        'dislikes'=>$this->EntityCount(Dislike::class),
         'hashtags'=>$this->EntityCount(Hashtag::class)
         ];
         //return parent::index();
@@ -69,7 +73,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Hashtag', 'fa fa-hashtag', Hashtag::class)->setPermission('ROLE_ADMIN');
 
        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Commentaire::class)->setPermission('ROLE_USER');
-       
+       yield MenuItem::linkToCrud("J'aime", 'fa fa-thumbs-up', Like::class)->setPermission('ROLE_USER');
+       yield MenuItem::linkToCrud("Je n'aime pas", 'fa fa-thumbs-down', Dislike::class)->setPermission('ROLE_USER');
+
         yield MenuItem::linkToCrud('Media', 'fas fa-video', Media::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Site', 'fas fa-globe', Site::class)->setPermission('ROLE_ADMIN');
 

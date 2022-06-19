@@ -57,7 +57,9 @@ class ArticleCrudController extends AbstractCrudController
             AssociationField::new("categorie"),
             TextField::new('auteur'),
             DateField::new('createdAt'),
-            AssociationField::new('hashtags')
+            AssociationField::new('hashtags'),
+            AssociationField::new('dislikes',"j'aime pas")->onlyOnIndex(),
+            AssociationField::new('likes', "j'aime")->onlyOnIndex()
         ];
     }
     public function configureCrud(Crud $crud): Crud
