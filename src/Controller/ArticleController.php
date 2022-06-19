@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\Commentaire;
+use App\Entity\Dislike;
+use App\Entity\Like;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\CommentaireRepository;
+use App\Repository\DislikeRepository;
 use App\Repository\HashtagRepository;
+use App\Repository\LikeRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +40,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id}", name="article_single")
      */
-    public function articleByIdAction(ArticleRepository $articleRepository, $id): Response
+    public function articleByIdAction(DislikeRepository $dislikeRepository,ArticleRepository $articleRepository,LikeRepository $likeRepository, $id): Response
     {   
         // dd($id);
         if (!$article=$articleRepository->find($id)) {
@@ -45,11 +49,23 @@ class ArticleController extends AbstractController
         
         $commentaires=$article->getCommentaires();
         $idArticle = $article->getId();
+        $user=$this->getUser();
+        $islike='true';
+        $isdislike='true';
+        if ($like=$likeRepository->findOneBy(['user'=>$user,'article'=>$article])) {
+            $islike='false';
+        }
+        if ($dislike=$dislikeRepository->findOneBy(['user'=>$user,'article'=>$article])) {
+            $isdislike='false';
+        }
+
         return $this->render('article/detail.html.twig', [
             'controller_name' => 'ArticleController',
             'article'=>$article,
             'commentaires'=>$commentaires,
-            'idArticle'=> $idArticle    
+            'idArticle'=> $idArticle,
+            'isdislike' => $isdislike,
+            'islike' => $islike    
            ]);
     }
     /**
@@ -132,6 +148,65 @@ class ArticleController extends AbstractController
             'titre'=>$titre,
             'articles'=>$articles
         ]);
+    }
+    /**
+     * @Route("/article/{idarticle}/like/{on}", name="ajout_like", methods={"GET"})
+     */
+    public function AjoutLike(Request $request,$idarticle,$on,LikeRepository $likeRepository, ArticleRepository $articleRepository, EntityManagerInterface $em ): Response
+    {
+
+        $user = $this->getUser();
+        if ($user==null) {
+            return $this->redirectToRoute("app_login");
+        }
+        $article=$articleRepository->find($idarticle);
+        $like=new Like();
+        $like->setUser($user);
+        $like->setArticle($article);
+       if ($on=='true') {
+        $em->persist($like);
+        $em->flush();
+       } else {
+            $like=$likeRepository->findOneBy(['user'=>$user,'article'=>$article]);
+            //dd($like);
+            $em->remove($like);
+            $em->flush();
+       }
+            return $this->redirectToRoute("article_single",[
+                'id'=> $idarticle
+            ]);
+      
+        
+    }
+
+    /**
+     * @Route("/article/{idarticle}/dislike/{on}", name="ajout_dislike", methods={"GET"})
+     */
+    public function AjoutDislike(Request $request,$idarticle,$on,DislikeRepository $dislikeRepository, ArticleRepository $articleRepository, EntityManagerInterface $em ): Response
+    {
+
+        $user = $this->getUser();
+        if ($user==null) {
+            return $this->redirectToRoute("app_login");
+        }
+        $article=$articleRepository->find($idarticle);
+        $dislike=new Dislike();
+        $dislike->setUser($user);
+        $dislike->setArticle($article);
+       if ($on=='true') {
+        $em->persist($dislike);
+        $em->flush();
+       } else {
+            $dislike=$dislikeRepository->findOneBy(['user'=>$user,'article'=>$article]);
+            //dd($like);
+            $em->remove($dislike);
+            $em->flush();
+       }
+            return $this->redirectToRoute("article_single",[
+                'id'=> $idarticle
+            ]);
+      
+        
     }
      
 }
