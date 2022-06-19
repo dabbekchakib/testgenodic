@@ -75,7 +75,11 @@ class ArticleController extends AbstractController
      */
     public function AjoutComment(Request $request, CommentaireRepository $commentaireRepository ,ArticleRepository $articleRepository, EntityManagerInterface $em ): Response
     {
-        $parent= $commentaireRepository->find($request->get('parent'));
+        try {
+            $parent= $commentaireRepository->find($request->get('parent'));
+        } catch (\Throwable $th) {
+            $parent= null;
+        }
         $message = $request->get('Message');
         $user = $this->getUser();
         $idArticle = $request->get('idArticle');
