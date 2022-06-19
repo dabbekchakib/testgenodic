@@ -25,3 +25,6 @@ a.nav-link:hover {
     margin-top: 14px !important;
     display: block;
 }
+.rotate-180{
+    transform: rotateY(180deg);
+}

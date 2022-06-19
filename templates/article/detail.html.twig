@@ -57,10 +57,18 @@ endblock%} {% block body %}
 						</div>
 						<!-- post bottom section -->
 						<div class="post-bottom">
+						{% set hashtags = article.hashtags %}
+						{% if hashtags|length > 0 %}
+						<div class="section-header">
+						<h3 class="section-title">Mots clés ({{hashtags|length}})</h3>
+						<img src="{{asset('front/images/wave.svg')}}" class="wave" alt="wave">
+					</div>
+						{% endif %}
+						
 							<div class="row d-flex align-items-center">
 								<div class="col-md-12 col-12 text-center text-md-start">
 									<!-- tags -->
-									{% set hashtags = article.hashtags %}
+									
 									{% for hashtag in hashtags %}
 									<a href="{{path('article_hashtag',{label:hashtag.label})}}"
 										class="tag">#{{hashtag.label}}</a>
@@ -78,13 +86,14 @@ endblock%} {% block body %}
 
 					<div class="spacer" data-height="50" style="height: 50px;"></div>
 
+					
+					<!-- post comments -->
+					{% if commentaires|length > 0 %}
 					<!-- section header -->
 					<div class="section-header">
 						<h3 class="section-title">Commentaires ({{commentaires|length}})</h3>
 						<img src="{{asset('front/images/wave.svg')}}" class="wave" alt="wave">
 					</div>
-					<!-- post comments -->
-					{% if commentaires|length > 0 %}
 					<div class="comments bordered padding-30 rounded">
 
 						<ul class="comments">
@@ -94,12 +103,12 @@ endblock%} {% block body %}
 							<li class="comment rounded">
 								<div class="thumb">
 									{% if comment.utilisateur.photo %}
-									<img class="image-comment rounded-circle"
+									<img class="image-comment rounded-circle border border-danger"
 										src="{{asset('uploads/users/')}}{{comment.utilisateur.photo}}"
 										alt="{{comment.utilisateur}}">
 
 									{% else %}
-									<img class="image-comment rounded-circle"
+									<img class="image-comment rounded-circle border border-danger"
 										src="{{asset('front/images/other/profile.jpg')}}"
 										alt="{{comment.utilisateur}}">
 
@@ -157,12 +166,12 @@ endblock%} {% block body %}
 							<li class="comment child rounded">
 								<div class="thumb">
 									{% if reponse.utilisateur.photo %}
-									<img class="image-comment rounded-circle"
+									<img class="image-comment rounded-circle border border-danger"
 										src="{{asset('uploads/users/')}}{{reponse.utilisateur.photo}}"
 										alt="{{reponse.utilisateur}}">
 
 									{% else %}
-									<img class="image-comment rounded-circle"
+									<img class="image-comment rounded-circle border border-danger"
 										src="{{asset('front/images/other/profile.jpg')}}"
 										alt="{{reponse.utilisateur}}">
 
@@ -262,8 +271,7 @@ endblock%} {% block body %}
 						<div class="inner-wrapper-sticky" style="position: relative;">
 							<!-- widget about -->
 							<div class="widget rounded">
-								<div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png"
-									style="background-image: url(&quot;images/map-bg.png&quot;);">
+								<div class="widget-about text-center">
 									<a target="blank" href="{{asset('uploads/articles/')}}{{article.fichier}}">
 										<img width="150px" height="150px" src="{{asset('front/images/pdf-logo.png')}}"
 											alt="logo" class="mb-4">
@@ -274,6 +282,7 @@ endblock%} {% block body %}
 							</div>
 							<!-- widget about -->
 							{% set hashtags = article.hashtags %}
+							{% include "reaction/reactions.html.twig" %}
 							{% include "hashtag/hashtags.html.twig" %}
 						</div>
 

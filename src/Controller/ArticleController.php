@@ -12,6 +12,7 @@ use App\Repository\HashtagRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,7 +39,10 @@ class ArticleController extends AbstractController
     public function articleByIdAction(ArticleRepository $articleRepository, $id): Response
     {   
         // dd($id);
-        $article=$articleRepository->find($id);
+        if (!$article=$articleRepository->find($id)) {
+            throw $this->createNotFoundException("pas d'article");
+        }
+        
         $commentaires=$article->getCommentaires();
         $idArticle = $article->getId();
         return $this->render('article/detail.html.twig', [
@@ -53,7 +57,10 @@ class ArticleController extends AbstractController
      */
     public function articleByCategoryAction(CategorieRepository $categorieRepository,$categorie): Response
     {
-        $categorie=$categorieRepository->find($categorie);
+        if (!$categorie=$categorieRepository->find($categorie)) {
+            throw $this->createNotFoundException("pas de catégorie");
+        }
+        
         $childCats=$categorieRepository->findBy(['parent'=>$categorie->getId()]);
         $articles=$categorie->getArticles();
         foreach ($childCats as $cat) {
@@ -113,8 +120,12 @@ class ArticleController extends AbstractController
      */
     public function articleByHashtagAction(HashtagRepository $hashtagRepository, $label): Response
     {
-        
-        $articles=$hashtagRepository->findOneBy(['label'=>$label])->getArticles();
+       
+        try {
+            $articles=$hashtagRepository->findOneBy(['label'=>$label])->getArticles();
+        } catch (\Throwable $th) {
+            throw $this->createNotFoundException("pas de hashtag");
+        }
        $titre=$label;
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',

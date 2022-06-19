@@ -29,7 +29,12 @@ class MediaController extends AbstractController
     public function mediaById(MediaRepository $mediaRepository, $id): Response
     {
         $titre="Media";
-        $media=$mediaRepository->find($id);
+        
+        try {
+            $media=$mediaRepository->find($id);
+        } catch (\Throwable $th) {
+            throw $this->createNotFoundException("pas de media");
+        }
         return $this->render('media/detail.html.twig', [
             'controller_name' => 'MediaController',
             'titre'=>$titre,
@@ -42,9 +47,14 @@ class MediaController extends AbstractController
     public function categoryMediaAction(MediaRepository $mediaRepository, CategorieRepository $categorieRepository, $id): Response
     {
         //dd($categorieRepository->find($id));
-        $titre=$categorieRepository->find($id)->getLabel();
-        $medias=$categorieRepository->findOneBy(array('label'=>$titre))->getMedia();
+        try {
+            $titre=$categorieRepository->find($id)->getLabel();
+            $medias=$categorieRepository->findOneBy(array('label'=>$titre))->getMedia();
        
+        } catch (\Throwable $th) {
+            throw $this->createNotFoundException("pas de catégorie media");
+        }
+        
         return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
             'titre'=>$titre,
