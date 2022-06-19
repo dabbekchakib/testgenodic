@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 16 juin 2022 à 18:59
+-- Généré le : Dim 19 juin 2022 à 07:45
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.2.34
 
@@ -31,7 +31,7 @@ CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fichier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fichier` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `auteur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `categorie_id` int(11) DEFAULT NULL,
@@ -133,7 +133,31 @@ INSERT INTO `commentaire` (`id`, `utilisateur_id`, `article_id`, `contenu`, `cre
 (5, 7, 5, 'test22', '2022-06-09 18:25:32', 0, NULL),
 (6, 10, 5, 'test123', '2022-06-09 18:29:36', 1, NULL),
 (7, 11, 5, 'test test', '2022-06-11 16:45:43', 1, NULL),
-(8, 7, 5, 'test', '2022-06-15 10:27:08', 1, 3);
+(8, 7, 5, 'test', '2022-06-15 10:27:08', 1, 3),
+(9, 7, 6, 'test', '2022-06-19 02:21:11', 1, NULL),
+(10, 7, 6, 'test2', '2022-06-19 02:22:12', 1, NULL),
+(11, 7, 6, 'reponse 1', '2022-06-19 02:22:58', 1, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `dislike`
+--
+
+CREATE TABLE `dislike` (
+  `id` int(11) NOT NULL,
+  `article_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ROW_FORMAT=DYNAMIC ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `dislike`
+--
+
+INSERT INTO `dislike` (`id`, `article_id`, `user_id`) VALUES
+(8, 6, 7),
+(9, 10, 7),
+(10, 17, 10);
 
 -- --------------------------------------------------------
 
@@ -177,6 +201,29 @@ INSERT INTO `hashtag` (`id`, `label`) VALUES
 (6, 'joel44'),
 (7, 'joel456'),
 (8, 'joel47');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `like`
+--
+
+CREATE TABLE `like` (
+  `id` int(11) NOT NULL,
+  `article_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ROW_FORMAT=DYNAMIC ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `like`
+--
+
+INSERT INTO `like` (`id`, `article_id`, `user_id`) VALUES
+(18, 5, 7),
+(17, 6, 7),
+(20, 10, 7),
+(1, 17, 4),
+(21, 17, 10);
 
 -- --------------------------------------------------------
 
@@ -312,7 +359,7 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `photo`
 (4, 'mhasni.jsk.94j@unnuhol.ga', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$axDDKPUd97Avoe27XW90i.VXj4Z8i/OHH.N1Xo8GELQw/BuFX38dW', 'test411', 'test411', NULL),
 (5, 'contact@kvbvby.de', '[]', '$2y$13$2jC6TKTKbG.JI559Ltf/v.qVlHcSuhaBHIGYU8/OnZ3NJGOAs4NBq', 'test411CC', 'test411CCC', NULL),
 (6, 'admin@gmail.com', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$p4XgjtXS/7OmbY4QEuPglOHx5/54.spiyOgO1gI0y39colbj5eJum', 'admin', 'prenom', 'harry-cunningham-EPi3TRQc5Z0-unsplash.jpg'),
-(7, 'admin@admin.com', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$p4GtXgOqZ9JCtc57SNwD7udd/h1BwlufexYT1AxSkIw9WPqaYRev.', 'NomAdmin', 'PrenomAdmin', NULL),
+(7, 'admin@admin.com', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$Vmfml9aBabb9MOR20UjFWed8ho8zPe3E2lw8/kn0Va/wdgQvH03hW', 'NomAdmin', 'PrenomAdmin', '44.png'),
 (8, 'fdgdsfhg@fhgs.com', '[]', '$2y$13$1yaJOUgBFR4dNVY72YZAUeuWHGaklJUljnDqDxY6jOGuXJ8UTebp6', '', '', NULL),
 (9, 'mhdh4j@unnuhol.ga', '[\"ROLE_USER\"]', '$2y$13$N9c0A6yRmW/rK0hMGsMoae3z32FBIlpTeXM.SJlvaALFrPUOimjvy', 'dgfdsg', '442', NULL),
 (10, 'user@user.com', '[\"ROLE_USER\"]', '$2y$13$Wlafp1mCIEhVUO1NQu4Awuvk3Uesdy.IGmKfFUuc5/THUR6XzCEg6', 'userNom', 'userPrenom', NULL),
@@ -355,6 +402,15 @@ ALTER TABLE `commentaire`
   ADD KEY `IDX_67F068BC727ACA70` (`parent_id`);
 
 --
+-- Index pour la table `dislike`
+--
+ALTER TABLE `dislike`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `articleUser` (`article_id`,`user_id`),
+  ADD KEY `IDX_FE3BECAA7294869C` (`article_id`),
+  ADD KEY `IDX_FE3BECAAA76ED395` (`user_id`);
+
+--
 -- Index pour la table `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
@@ -366,6 +422,15 @@ ALTER TABLE `doctrine_migration_versions`
 ALTER TABLE `hashtag`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_5AB52A61EA750E8` (`label`);
+
+--
+-- Index pour la table `like`
+--
+ALTER TABLE `like`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `articleUser` (`article_id`,`user_id`),
+  ADD KEY `IDX_AC6340B37294869C` (`article_id`),
+  ADD KEY `IDX_AC6340B3A76ED395` (`user_id`);
 
 --
 -- Index pour la table `media`
@@ -416,13 +481,25 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT pour la table `dislike`
+--
+ALTER TABLE `dislike`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `hashtag`
 --
 ALTER TABLE `hashtag`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `like`
+--
+ALTER TABLE `like`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `media`
@@ -478,6 +555,20 @@ ALTER TABLE `commentaire`
   ADD CONSTRAINT `FK_67F068BC727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `commentaire` (`id`),
   ADD CONSTRAINT `FK_67F068BC7294869C` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
   ADD CONSTRAINT `FK_67F068BCFB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `dislike`
+--
+ALTER TABLE `dislike`
+  ADD CONSTRAINT `FK_FE3BECAA7294869C` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+  ADD CONSTRAINT `FK_FE3BECAAA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `like`
+--
+ALTER TABLE `like`
+  ADD CONSTRAINT `FK_AC6340B37294869C` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+  ADD CONSTRAINT `FK_AC6340B3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Contraintes pour la table `media`
