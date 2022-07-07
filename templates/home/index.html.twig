@@ -107,16 +107,9 @@ endblock%} {% block body %}
             {% endfor %}
           </div>
 
-          <nav>
-            <ul class="pagination justify-content-center">
-              <li class="page-item active" aria-current="page">
-                <span class="page-link">1</span>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-            </ul>
-          </nav>
+          
         </div>
+        
         <div class="col-lg-4">
           <!-- sidebar -->
           <div class="sidebar">
@@ -148,6 +141,8 @@ endblock%} {% block body %}
     </div>
   </section>
 </div>
+
+{% include "citations.html.twig" %}
 {% include "sites.html.twig" %} {% include "footer.html.twig" %}
 
 <!-- end site wrapper -->

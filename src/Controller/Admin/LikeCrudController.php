@@ -30,9 +30,10 @@ class LikeCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $admin = in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true);
         return [
             AssociationField::new('article'),
-            AssociationField::new('user')
+            AssociationField::new('user','Utilisateur')
         ];
     }
     public function configureActions(Actions $actions): Actions
@@ -75,7 +76,6 @@ class LikeCrudController extends AbstractCrudController
             $queryBuilder->andWhere("entity.user = :id")->setParameter('id', $user);
         }
         $paginator = $this->container->get(PaginatorFactory::class)->create($queryBuilder);
-
         // this can happen after deleting some items and trying to return
         // to a 'index' page that no longer exists. Redirect to the last page instead
         if ($paginator->isOutOfRange()) {
@@ -87,7 +87,7 @@ class LikeCrudController extends AbstractCrudController
         $entities = $this->container->get(EntityFactory::class)->createCollection($context->getEntity(), $paginator->getResults());
         $this->container->get(EntityFactory::class)->processFieldsForAll($entities, $fields);
         $actions = $this->container->get(EntityFactory::class)->processActionsForAll($entities, $context->getCrud()->getActionsConfig());
-
+        
         $responseParameters = $this->configureResponseParameters(KeyValueStore::new([
             'pageName' => Crud::PAGE_INDEX,
             'templateName' => 'crud/index',
