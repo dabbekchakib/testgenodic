@@ -57,9 +57,11 @@ section {
     background-attachment: fixed;
     height: 1040px;
     width: 100%;
+    background: #9bac94!important;
     &:after {
         content: '';
-        background: $coloroverlay;
+        // background: $coloroverlay;
+        background: #9bac94!important;
         display: block;
         left: 0;
         opacity: .8;
