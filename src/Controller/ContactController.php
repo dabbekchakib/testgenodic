@@ -37,7 +37,7 @@ class ContactController extends AbstractController
         $name= $request->get('nomPrenom');
         $message = (new \Swift_Message('Hello Email'))
         ->setFrom($request->get('Email'))
-        ->setTo('dabbekchakib@gmail.com')
+        ->setTo('benkhalifahalima@hotmail.com')
         ->setBody(
             $request->get('Message')
         );

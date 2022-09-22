@@ -1051,10 +1051,11 @@ section {
   background-attachment: fixed;
   height: 1040px;
   width: 100%;
+  background: #9bac94!important;
 }
 .hero:after {
   content: "";
-  background: #203656;
+  background: #9bac94;
   display: block;
   left: 0;
   opacity: 0.8;
