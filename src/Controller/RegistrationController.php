@@ -34,7 +34,7 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, 
                             UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator,
-                             EntityManagerInterface $entityManager): Response
+                             EntityManagerInterface $entityManager, \Swift_Mailer $swiftMailer): Response
     {
        
         $user = new User();
@@ -83,13 +83,23 @@ class RegistrationController extends AbstractController
             $user->getEmail()
         );
     
-    $email = new TemplatedEmail();
+   /*  $email = new TemplatedEmail();
     $email->from('send@example.com');
     $email->to($user->getEmail());
     $email->htmlTemplate('registration/confirmation_email.html.twig');
     $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
-    
     $this->mailer->send($email);
+     */
+    $message = (new \Swift_Message('Genodics Email Verification'))
+    ->setFrom('dabbekchakib@gmail.com')
+    ->setTo($user->getEmail())
+    ->setBody(
+        $signatureComponents->getSignedUrl()
+    );
+    $swiftMailer->send($message);
+
+
+    
 
     // generate and return a response for the browser
 
