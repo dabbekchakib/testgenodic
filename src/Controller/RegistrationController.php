@@ -21,14 +21,14 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    private $verifyEmailHelper;
+   /*  private $verifyEmailHelper;
     private $mailer;
     
-    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer)
+     public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer)
     {
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
-    }
+    }  */
     /**
      * @Route("/register", name="app_register")
      */
@@ -77,11 +77,11 @@ class RegistrationController extends AbstractController
 
          // handle the user registration form and persist the new user...
     
-         $signatureComponents = $this->verifyEmailHelper->generateSignature(
+         /* $signatureComponents = $this->verifyEmailHelper->generateSignature(
             'registration_confirmation_route',
             $user->getId(),
             $user->getEmail()
-        );
+        ); */
     
    /*  $email = new TemplatedEmail();
     $email->from('send@example.com');
@@ -90,13 +90,14 @@ class RegistrationController extends AbstractController
     $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
     $this->mailer->send($email);
      */
-    $message = (new \Swift_Message('Genodics Email Verification'))
+
+   /*  $message = (new \Swift_Message('Genodics Email Verification'))
     ->setFrom('dabbekchakib@gmail.com')
     ->setTo($user->getEmail())
     ->setBody(
         $signatureComponents->getSignedUrl()
     );
-    $swiftMailer->send($message);
+    $swiftMailer->send($message); */
 
 
     
